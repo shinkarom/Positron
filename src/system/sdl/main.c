@@ -64,7 +64,7 @@
 #define TOUCH_TIMEOUT (10 * TIC80_FRAMERATE)
 #endif
 
-#define TIC_PACKAGE "com.nesbox.tic"
+#define TIC_PACKAGE "org.positron"
 
 #define KBD_COLS 22
 #define KBD_ROWS 17

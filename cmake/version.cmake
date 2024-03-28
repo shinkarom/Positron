@@ -32,7 +32,7 @@ if(Git_FOUND)
         set(VERSION_HASH ${GIT_COMMIT_HASH} )
 
         execute_process(
-            COMMAND ${GIT_EXECUTABLE} rev-list HEAD --count
+            COMMAND ${GIT_EXECUTABLE} rev-list 0952e91.. --count
             WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
             OUTPUT_VARIABLE VERSION_REVISION
             OUTPUT_STRIP_TRAILING_WHITESPACE
