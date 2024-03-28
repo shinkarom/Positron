@@ -106,8 +106,8 @@ if(BUILD_DEMO_CARTS)
 
         get_filename_component(CART_NAME ${CART_FILE} NAME_WE)
 
-        set(OUTNAME ${CMAKE_SOURCE_DIR}/build/assets/${CART_NAME}.tic.dat)
-        set(OUTPRJ ${CMAKE_SOURCE_DIR}/build/${CART_NAME}.tic)
+        set(OUTNAME ${CMAKE_SOURCE_DIR}/build/assets/${CART_NAME}.posi.dat)
+        set(OUTPRJ ${CMAKE_SOURCE_DIR}/build/${CART_NAME}.posi)
 
         list(APPEND DEMO_CARTS_OUT ${OUTNAME})
 
@@ -134,9 +134,9 @@ if(BUILD_DEMO_CARTS)
             get_filename_component(CART_NAME ${CART_FILE} NAME_WE)
             get_filename_component(DIR ${CART_FILE} DIRECTORY)
 
-            set(OUTNAME ${CMAKE_SOURCE_DIR}/build/assets/${CART_NAME}.tic.dat)
+            set(OUTNAME ${CMAKE_SOURCE_DIR}/build/assets/${CART_NAME}.posi.dat)
             set(WASM_BINARY ${DIR}/${CART_NAME}.wasm)
-            set(OUTPRJ ${CMAKE_SOURCE_DIR}/build/${CART_NAME}.tic)
+            set(OUTPRJ ${CMAKE_SOURCE_DIR}/build/${CART_NAME}.posi)
             list(APPEND DEMO_CARTS_OUT ${OUTNAME})
             add_custom_command(OUTPUT ${OUTNAME}
                 COMMAND ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/wasmp2cart ${CART_FILE} ${OUTPRJ} --binary ${WASM_BINARY} && ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/bin2txt ${OUTPRJ} ${OUTNAME} -z

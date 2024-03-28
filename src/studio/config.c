@@ -210,7 +210,7 @@ static void setDefault(Config* config)
     {
         static const u8 ConfigZip[] =
         {
-            #include "../build/assets/config.tic.dat"
+            #include "../build/assets/config.posi.dat"
         };
 
         u8* data = malloc(sizeof(tic_cartridge));

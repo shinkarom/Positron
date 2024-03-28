@@ -7,11 +7,11 @@
 #if defined (TIC_BUILD_WITH_LUA)
 static const u8 LuaDemoRom[] =
 {
-    #include "../build/assets/luademo.tic.dat"
+    #include "../build/assets/luademo.posi.dat"
 };
 static const u8 LuaMarkRom[] =
 {
-    #include "../build/assets/luamark.tic.dat"
+    #include "../build/assets/luamark.posi.dat"
 };
 tic_script_config_extra LuaSyntaxConfigExtra =
 {
@@ -26,11 +26,11 @@ tic_script_config_extra LuaSyntaxConfigExtra =
 #if defined (TIC_BUILD_WITH_MOON)
 static const u8 MoonDemoRom[] =
 {
-    #include "../build/assets/moondemo.tic.dat"
+    #include "../build/assets/moondemo.posi.dat"
 };
 static const u8 MoonMarkRom[] =
 {
-    #include "../build/assets/moonmark.tic.dat"
+    #include "../build/assets/moonmark.posi.dat"
 };
 tic_script_config_extra MoonSyntaxConfigExtra =
 {
@@ -45,12 +45,12 @@ tic_script_config_extra MoonSyntaxConfigExtra =
 #if defined (TIC_BUILD_WITH_FENNEL)
 static const u8 FennelDemoRom[] =
 {
-    #include "../build/assets/fenneldemo.tic.dat"
+    #include "../build/assets/fenneldemo.posi.dat"
 };
 /* does not exists
 static const u8 FennelMarkRom[] =
 {
-    #include "../build/assets/fennelmark.tic.dat"
+    #include "../build/assets/fennelmark.posi.dat"
 };
 */
 
@@ -69,12 +69,12 @@ tic_script_config_extra FennelSyntaxConfigExtra =
 
 static const u8 JsDemoRom[] =
 {
-    #include "../build/assets/jsdemo.tic.dat"
+    #include "../build/assets/jsdemo.posi.dat"
 };
 
 static const u8 jsmark[] =
 {
-    #include "../build/assets/jsmark.tic.dat"
+    #include "../build/assets/jsmark.posi.dat"
 };
 
 tic_script_config_extra JsSyntaxConfigExtra =
@@ -92,12 +92,12 @@ tic_script_config_extra JsSyntaxConfigExtra =
 
 static const u8 RubyDemoRom[] =
 {
-    #include "../build/assets/rubydemo.tic.dat"
+    #include "../build/assets/rubydemo.posi.dat"
 };
 
 static const u8 rubymark[] =
 {
-    #include "../build/assets/rubymark.tic.dat"
+    #include "../build/assets/rubymark.posi.dat"
 };
 
 tic_script_config_extra MRubySyntaxConfigExtra =
@@ -115,12 +115,12 @@ tic_script_config_extra MRubySyntaxConfigExtra =
 
 static const u8 WrenDemoRom[] =
 {
-    #include "../build/assets/wrendemo.tic.dat"
+    #include "../build/assets/wrendemo.posi.dat"
 };
 
 static const u8 wrenmark[] =
 {
-    #include "../build/assets/wrenmark.tic.dat"
+    #include "../build/assets/wrenmark.posi.dat"
 };
 
 tic_script_config_extra WrenSyntaxConfigExtra =
@@ -137,12 +137,12 @@ tic_script_config_extra WrenSyntaxConfigExtra =
 #if defined (TIC_BUILD_WITH_SCHEME)
 static const u8 SchemeDemoRom[] =
 {
-    #include "../build/assets/schemedemo.tic.dat"
+    #include "../build/assets/schemedemo.posi.dat"
 };
 
 static const u8 schememark[] =
 {
-    #include "../build/assets/schememark.tic.dat"
+    #include "../build/assets/schememark.posi.dat"
 };
 tic_script_config_extra SchemeSyntaxConfigExtra =
 {
@@ -158,12 +158,12 @@ tic_script_config_extra SchemeSyntaxConfigExtra =
 #if defined (TIC_BUILD_WITH_SQUIRREL)
 static const u8 SquirrelDemoRom[] =
 {
-    #include "../build/assets/squirreldemo.tic.dat"
+    #include "../build/assets/squirreldemo.posi.dat"
 };
 
 static const u8 squirrelmark[] =
 {
-    #include "../build/assets/squirrelmark.tic.dat"
+    #include "../build/assets/squirrelmark.posi.dat"
 };
 tic_script_config_extra SquirrelSyntaxConfigExtra =
 {
@@ -180,12 +180,12 @@ tic_script_config_extra SquirrelSyntaxConfigExtra =
 
 static const u8 WasmDemoRom[] =
 {
-    #include "../build/assets/wasmdemo.tic.dat"
+    #include "../build/assets/wasmdemo.posi.dat"
 };
 
 static const u8 wasmmark[] =
 {
-    #include "../build/assets/wasmmark.tic.dat"
+    #include "../build/assets/wasmmark.posi.dat"
 };
 
 tic_script_config_extra WasmSyntaxConfigExtra =
@@ -203,12 +203,12 @@ tic_script_config_extra WasmSyntaxConfigExtra =
 
 static const u8 JanetDemoRom[] =
   {
-#include "../build/assets/janetdemo.tic.dat"
+#include "../build/assets/janetdemo.posi.dat"
   };
 
 static const u8 janetmark[] =
   {
-#include "../build/assets/janetmark.tic.dat"
+#include "../build/assets/janetmark.posi.dat"
   };
 
 tic_script_config_extra JanetSyntaxConfigExtra =
@@ -226,12 +226,12 @@ tic_script_config_extra JanetSyntaxConfigExtra =
 
 static const u8 PythonDemoRom[] =
   {
-#include "../build/assets/pythondemo.tic.dat"
+#include "../build/assets/pythondemo.posi.dat"
   };
 
 static const u8 pythonmark[] =
   {
-#include "../build/assets/pythonmark.tic.dat"
+#include "../build/assets/pythonmark.posi.dat"
   };
 
 tic_script_config_extra PythonSyntaxConfigExtra =

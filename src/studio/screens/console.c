@@ -646,7 +646,7 @@ static char* getDemoCartPath(char* path, tic_script_config* script)
 {
     strcpy(path, TIC_LOCAL_VERSION "default_");
     strcat(path, script->name);
-    strcat(path, ".tic");
+    strcat(path, ".posi");
 
     return path;
 }
@@ -1525,57 +1525,57 @@ static void onInstallDemosCommand(Console* console)
 
         static const u8 demofire[] =
         {
-            #include "../build/assets/fire.tic.dat"
+            #include "../build/assets/fire.posi.dat"
         };
 
         static const u8 demop3d[] =
         {
-            #include "../build/assets/p3d.tic.dat"
+            #include "../build/assets/p3d.posi.dat"
         };
 
         static const u8 demosfx[] =
         {
-            #include "../build/assets/sfx.tic.dat"
+            #include "../build/assets/sfx.posi.dat"
         };
 
         static const u8 demopalette[] =
         {
-            #include "../build/assets/palette.tic.dat"
+            #include "../build/assets/palette.posi.dat"
         };
 
         static const u8 demofont[] =
         {
-            #include "../build/assets/font.tic.dat"
+            #include "../build/assets/font.posi.dat"
         };
 
         static const u8 demomusic[] =
         {
-            #include "../build/assets/music.tic.dat"
+            #include "../build/assets/music.posi.dat"
         };
 
         static const u8 demoquest[] =
         {
-            #include "../build/assets/quest.tic.dat"
+            #include "../build/assets/quest.posi.dat"
         };
 
         static const u8 demotetris[] =
         {
-            #include "../build/assets/tetris.tic.dat"
+            #include "../build/assets/tetris.posi.dat"
         };
 
         static const u8 demobenchmark[] =
         {
-            #include "../build/assets/benchmark.tic.dat"
+            #include "../build/assets/benchmark.posi.dat"
         };
 
         static const u8 demobpp[] =
         {
-            #include "../build/assets/bpp.tic.dat"
+            #include "../build/assets/bpp.posi.dat"
         };
 
         static const u8 democar[] =
         {
-            #include "../build/assets/car.tic.dat"
+            #include "../build/assets/car.posi.dat"
         };
 
 #define DEMOS_LIST(macro)       \
@@ -1593,7 +1593,7 @@ static void onInstallDemosCommand(Console* console)
 
         static const struct Demo {const char* name; const u8* data; s32 size;} Demos[] =
         {
-#define     DEMOS_DEF(name) {#name ".tic", demo ## name, sizeof demo ## name},
+#define     DEMOS_DEF(name) {#name ".posi", demo ## name, sizeof demo ## name},
             DEMOS_LIST(DEMOS_DEF)
 #undef      DEMOS_DEF
         };
@@ -1619,7 +1619,7 @@ static void onInstallDemosCommand(Console* console)
             if (ex->markRom != NULL) { // having a Mark is not mandatory
                 char cartname[1024];
                 strcpy(cartname, ln->name);
-                strcat(cartname, "mark.tic");
+                strcat(cartname, "mark.posi");
 
                 tic_fs_save(fs, cartname, data, tic_tool_unzip(data, sizeof(tic_cartridge), ex->markRom, ex->markRomSize), true);
                 printFront(console, Bunny);
