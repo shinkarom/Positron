@@ -53,7 +53,7 @@
 
 #define TIC_COLOR_BG tic_color_black
 
-#define CONFIG_TIC "config.tic"
+#define CONFIG_TIC "config.posi"
 #define CONFIG_TIC_PATH TIC_LOCAL_VERSION CONFIG_TIC
 
 #define CART_EXT ".posi"

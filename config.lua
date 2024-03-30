@@ -2,7 +2,7 @@ THEME=
 {
 	CODE =
 	{
-		BG     =15,
+		BG     =0,
 		FG     =12,
 		STRING =4,
 		NUMBER =11,
@@ -12,7 +12,7 @@ THEME=
 		SIGN   =13,
 		SELECT =14,
 		CURSOR =2,
-		SHADOW =true,
+		SHADOW =false,
 		ALT_FONT=false,
 		ALT_CARET=false,
 		MATCH_DELIMITERS=true,
@@ -28,7 +28,7 @@ THEME=
 	},
 }
 
-CHECK_NEW_VERSION=true
+CHECK_NEW_VERSION=false
 SOFTWARE_RENDERING=false
 UI_SCALE=4
 TRIM_ON_SAVE=false

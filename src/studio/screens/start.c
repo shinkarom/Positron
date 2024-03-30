@@ -152,9 +152,12 @@ void initStart(Start* start, Studio* studio, const char* cart)
     for(s32 i = 0; i < COUNT_OF(Header); i++)
         strcpy(&start->text[i * STUDIO_TEXT_BUFFER_WIDTH], Header[i]);
 
-    for(s32 i = 0; i < STUDIO_TEXT_BUFFER_SIZE; i++)
-        start->color[i] = CLAMP(((i % STUDIO_TEXT_BUFFER_WIDTH) + (i / STUDIO_TEXT_BUFFER_WIDTH)) / 2, 
-            tic_color_black, tic_color_dark_grey);
+    //for(s32 i = 0; i < STUDIO_TEXT_BUFFER_SIZE; i++)
+    //    start->color[i] = CLAMP(((i % STUDIO_TEXT_BUFFER_WIDTH) + (i / STUDIO_TEXT_BUFFER_WIDTH)) / 2, 
+    //        tic_color_black, tic_color_dark_grey);
+			
+	for(s32 i = 0; i < STUDIO_TEXT_BUFFER_SIZE; i++)
+        start->color[i] = tic_color_white;
 
 #if defined(__EMSCRIPTEN__)
 
