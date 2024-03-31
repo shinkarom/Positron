@@ -1306,10 +1306,10 @@ static bool initPython(tic_mem* tic, const char* code)
     N._tic_core = pkpy_name("_tic_core");
     N.len = pkpy_name("len");
     N.__getitem__ = pkpy_name("__getitem__");
-    N.TIC = pkpy_name("TIC");
+    N.TIC = pkpy_name("TICK");
     N.BOOT = pkpy_name("BOOT");
-    N.SCN = pkpy_name("SCN");
-    N.BDR = pkpy_name("BDR");
+    N.SCN = pkpy_name("SCAN");
+    N.BDR = pkpy_name("BRDR");
     N.MENU = pkpy_name("MENU");
 
     closePython(tic);
@@ -1349,7 +1349,7 @@ void callPythonTick(tic_mem* tic)
 
     pkpy_push_null(core->currentVM);
     if(!pkpy_vectorcall(core->currentVM, 0)){
-        report_error(core, "error while running TIC\n");
+        report_error(core, "error while running TICK\n");
     }else{
         pkpy_pop_top(core->currentVM);
     }
@@ -1379,7 +1379,7 @@ void callPythonScanline(tic_mem* tic, s32 row, void* data) {
     pkpy_push_null(core->currentVM);
     pkpy_push_int(core->currentVM, row);
     if(!pkpy_vectorcall(core->currentVM, 1)){
-        report_error(core, "error while running SCN\n");
+        report_error(core, "error while running SCAN\n");
     }else{
         pkpy_pop_top(core->currentVM);
     }
@@ -1395,7 +1395,7 @@ void callPythonBorder(tic_mem* tic, s32 row, void* data) {
     pkpy_push_null(core->currentVM);
     pkpy_push_int(core->currentVM, row);
     if(!pkpy_vectorcall(core->currentVM, 1)){
-        report_error(core, "error while running BDR\n");
+        report_error(core, "error while running BRDR\n");
     }else{
         pkpy_pop_top(core->currentVM);
     }

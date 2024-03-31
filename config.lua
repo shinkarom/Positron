@@ -34,7 +34,7 @@ UI_SCALE=4
 TRIM_ON_SAVE=false
 
 ---------------------------
-function TIC()
+function TICK()
 	cls()
 	local label="This is system configuration cartridge"
 	local size=print(label,0,-6)

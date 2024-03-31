@@ -422,12 +422,6 @@ static void enumFiles(tic_fs* fs, const char* path, fs_list_callback callback, v
 
 void tic_fs_enum(tic_fs* fs, fs_list_callback onItem, fs_done_callback onDone, void* data)
 {
-    if (isRoot(fs) && !onItem(PublicDir, NULL, NULL, 0, data, true))
-    {
-        onDone(data);
-        return;
-    }
-
 #if defined(TIC_BUILD_WITH_LUA) && defined(BUILD_EDITORS)
     if(isPublic(fs))
     {

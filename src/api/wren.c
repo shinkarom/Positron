@@ -42,7 +42,7 @@ static WrenHandle* overline_handle  = NULL;
 static bool loaded = false;
 
 static char const* tic_wren_api = "\n\
-class TIC {\n\
+class POSI {\n\
     foreign static btn()\n\
     foreign static btn(id)\n\
     foreign static btnp(id)\n\
@@ -148,18 +148,18 @@ class TIC {\n\
     foreign static fget(index, flag)\n\
     foreign static fset(index, flag, val)\n\
     foreign static mgeti__(index)\n\
-    static print(v) { TIC.print__(v.toString, 0, 0, 15, false, 1, false) }\n\
-    static print(v,x,y) { TIC.print__(v.toString, x, y, 15, false, 1, false) }\n\
-    static print(v,x,y,color) { TIC.print__(v.toString, x, y, color, false, 1, false) }\n\
-    static print(v,x,y,color,fixed) { TIC.print__(v.toString, x, y, color, fixed, 1, false) }\n\
-    static print(v,x,y,color,fixed,scale) { TIC.print__(v.toString, x, y, color, fixed, scale, false) }\n\
-    static print(v,x,y,color,fixed,scale,alt) { TIC.print__(v.toString, x, y, color, fixed, scale, alt) }\n\
-    static trace(v) { TIC.trace__(v.toString, 15) }\n\
-    static trace(v,color) { TIC.trace__(v.toString, color) }\n\
+    static print(v) { POSI.print__(v.toString, 0, 0, 15, false, 1, false) }\n\
+    static print(v,x,y) { POSI.print__(v.toString, x, y, 15, false, 1, false) }\n\
+    static print(v,x,y,color) { POSI.print__(v.toString, x, y, color, false, 1, false) }\n\
+    static print(v,x,y,color,fixed) { POSI.print__(v.toString, x, y, color, fixed, 1, false) }\n\
+    static print(v,x,y,color,fixed,scale) { POSI.print__(v.toString, x, y, color, fixed, scale, false) }\n\
+    static print(v,x,y,color,fixed,scale,alt) { POSI.print__(v.toString, x, y, color, fixed, scale, alt) }\n\
+    static trace(v) { POSI.trace__(v.toString, 15) }\n\
+    static trace(v,color) { POSI.trace__(v.toString, color) }\n\
     static map(cell_x, cell_y, cell_w, cell_h, x, y, alpha_color, scale, remap) {\n\
-        var map_w = TIC.map_width__\n\
-        var map_h = TIC.map_height__\n\
-        var size = TIC.spritesize__ * scale\n\
+        var map_w = POSI.map_width__\n\
+        var map_h = POSI.map_height__\n\
+        var size = POSI.spritesize__ * scale\n\
         var jj = y\n\
         var ii = x\n\
         var flip = 0\n\
@@ -174,7 +174,7 @@ class TIC {\n\
                 while(mi >= map_w) mi = mi - map_w\n\
                 while(mj >= map_h) mj = mj - map_h\n\
                 var index = mi + mj * map_w\n\
-                var tile_index = TIC.mgeti__(index)\n\
+                var tile_index = POSI.mgeti__(index)\n\
                 var ret = remap.call(tile_index, mi, mj)\n\
                 if (ret.type == List) {\n\
                     tile_index = ret[0]\n\
@@ -183,7 +183,7 @@ class TIC {\n\
                 } else if (ret.type == Num) {\n\
                     tile_index = ret\n\
                 }\n\
-                TIC.spr__(tile_index, ii, jj, alpha_color, scale, flip, rotate)\n\
+                POSI.spr__(tile_index, ii, jj, alpha_color, scale, flip, rotate)\n\
                 ii = ii + size\n\
             }\n\
             jj = jj + size\n\
@@ -1442,118 +1442,118 @@ static void wren_fset(WrenVM* vm)
 
 static WrenForeignMethodFn foreignTicMethods(const char* signature)
 {
-    if (strcmp(signature, "static TIC.btn()"                    ) == 0) return wren_btn;
-    if (strcmp(signature, "static TIC.btn(_)"                   ) == 0) return wren_btn;
-    if (strcmp(signature, "static TIC.btnp(_)"                  ) == 0) return wren_btnp;
-    if (strcmp(signature, "static TIC.btnp(_,_,_)"              ) == 0) return wren_btnp;
-    if (strcmp(signature, "static TIC.key(_)"                   ) == 0) return wren_key;
-    if (strcmp(signature, "static TIC.keyp(_)"                  ) == 0) return wren_keyp;
-    if (strcmp(signature, "static TIC.keyp(_,_,_)"              ) == 0) return wren_keyp;
-    if (strcmp(signature, "static TIC.mouse()"                  ) == 0) return wren_mouse;
+    if (strcmp(signature, "static POSI.btn()"                    ) == 0) return wren_btn;
+    if (strcmp(signature, "static POSI.btn(_)"                   ) == 0) return wren_btn;
+    if (strcmp(signature, "static POSI.btnp(_)"                  ) == 0) return wren_btnp;
+    if (strcmp(signature, "static POSI.btnp(_,_,_)"              ) == 0) return wren_btnp;
+    if (strcmp(signature, "static POSI.key(_)"                   ) == 0) return wren_key;
+    if (strcmp(signature, "static POSI.keyp(_)"                  ) == 0) return wren_keyp;
+    if (strcmp(signature, "static POSI.keyp(_,_,_)"              ) == 0) return wren_keyp;
+    if (strcmp(signature, "static POSI.mouse()"                  ) == 0) return wren_mouse;
 
-    if (strcmp(signature, "static TIC.font(_)"                  ) == 0) return wren_font;
-    if (strcmp(signature, "static TIC.font(_,_,_)"              ) == 0) return wren_font;
-    if (strcmp(signature, "static TIC.font(_,_,_,_)"            ) == 0) return wren_font;
-    if (strcmp(signature, "static TIC.font(_,_,_,_,_,_)"        ) == 0) return wren_font;
-    if (strcmp(signature, "static TIC.font(_,_,_,_,_,_,_)"      ) == 0) return wren_font;
-    if (strcmp(signature, "static TIC.font(_,_,_,_,_,_,_,_)"    ) == 0) return wren_font;
+    if (strcmp(signature, "static POSI.font(_)"                  ) == 0) return wren_font;
+    if (strcmp(signature, "static POSI.font(_,_,_)"              ) == 0) return wren_font;
+    if (strcmp(signature, "static POSI.font(_,_,_,_)"            ) == 0) return wren_font;
+    if (strcmp(signature, "static POSI.font(_,_,_,_,_,_)"        ) == 0) return wren_font;
+    if (strcmp(signature, "static POSI.font(_,_,_,_,_,_,_)"      ) == 0) return wren_font;
+    if (strcmp(signature, "static POSI.font(_,_,_,_,_,_,_,_)"    ) == 0) return wren_font;
 
-    if (strcmp(signature, "static TIC.spr(_)"                   ) == 0) return wren_spr;
-    if (strcmp(signature, "static TIC.spr(_,_,_)"               ) == 0) return wren_spr;
-    if (strcmp(signature, "static TIC.spr(_,_,_,_)"             ) == 0) return wren_spr;
-    if (strcmp(signature, "static TIC.spr(_,_,_,_,_)"           ) == 0) return wren_spr;
-    if (strcmp(signature, "static TIC.spr(_,_,_,_,_,_)"         ) == 0) return wren_spr;
-    if (strcmp(signature, "static TIC.spr(_,_,_,_,_,_,_)"       ) == 0) return wren_spr;
-    if (strcmp(signature, "static TIC.spr(_,_,_,_,_,_,_,_,_)"   ) == 0) return wren_spr;
+    if (strcmp(signature, "static POSI.spr(_)"                   ) == 0) return wren_spr;
+    if (strcmp(signature, "static POSI.spr(_,_,_)"               ) == 0) return wren_spr;
+    if (strcmp(signature, "static POSI.spr(_,_,_,_)"             ) == 0) return wren_spr;
+    if (strcmp(signature, "static POSI.spr(_,_,_,_,_)"           ) == 0) return wren_spr;
+    if (strcmp(signature, "static POSI.spr(_,_,_,_,_,_)"         ) == 0) return wren_spr;
+    if (strcmp(signature, "static POSI.spr(_,_,_,_,_,_,_)"       ) == 0) return wren_spr;
+    if (strcmp(signature, "static POSI.spr(_,_,_,_,_,_,_,_,_)"   ) == 0) return wren_spr;
 
-    if (strcmp(signature, "static TIC.map(_,_)"                 ) == 0) return wren_map;
-    if (strcmp(signature, "static TIC.map(_,_,_,_)"             ) == 0) return wren_map;
-    if (strcmp(signature, "static TIC.map(_,_,_,_,_,_)"         ) == 0) return wren_map;
-    if (strcmp(signature, "static TIC.map(_,_,_,_,_,_,_)"       ) == 0) return wren_map;
-    if (strcmp(signature, "static TIC.map(_,_,_,_,_,_,_,_)"     ) == 0) return wren_map;
+    if (strcmp(signature, "static POSI.map(_,_)"                 ) == 0) return wren_map;
+    if (strcmp(signature, "static POSI.map(_,_,_,_)"             ) == 0) return wren_map;
+    if (strcmp(signature, "static POSI.map(_,_,_,_,_,_)"         ) == 0) return wren_map;
+    if (strcmp(signature, "static POSI.map(_,_,_,_,_,_,_)"       ) == 0) return wren_map;
+    if (strcmp(signature, "static POSI.map(_,_,_,_,_,_,_,_)"     ) == 0) return wren_map;
 
-    if (strcmp(signature, "static TIC.mset(_,_)"                ) == 0) return wren_mset;
-    if (strcmp(signature, "static TIC.mset(_,_,_)"              ) == 0) return wren_mset;
-    if (strcmp(signature, "static TIC.mget(_,_)"                ) == 0) return wren_mget;
+    if (strcmp(signature, "static POSI.mset(_,_)"                ) == 0) return wren_mset;
+    if (strcmp(signature, "static POSI.mset(_,_,_)"              ) == 0) return wren_mset;
+    if (strcmp(signature, "static POSI.mget(_,_)"                ) == 0) return wren_mget;
 
 #if defined(BUILD_DEPRECATED)
-    if (strcmp(signature, "static TIC.textri(_,_,_,_,_,_,_,_,_,_,_,_)"      ) == 0) return wren_textri;
-    if (strcmp(signature, "static TIC.textri(_,_,_,_,_,_,_,_,_,_,_,_,_)"    ) == 0) return wren_textri;
-    if (strcmp(signature, "static TIC.textri(_,_,_,_,_,_,_,_,_,_,_,_,_,_)"  ) == 0) return wren_textri;
+    if (strcmp(signature, "static POSI.textri(_,_,_,_,_,_,_,_,_,_,_,_)"      ) == 0) return wren_textri;
+    if (strcmp(signature, "static POSI.textri(_,_,_,_,_,_,_,_,_,_,_,_,_)"    ) == 0) return wren_textri;
+    if (strcmp(signature, "static POSI.textri(_,_,_,_,_,_,_,_,_,_,_,_,_,_)"  ) == 0) return wren_textri;
 #endif
 
-    if (strcmp(signature, "static TIC.ttri(_,_,_,_,_,_,_,_,_,_,_,_)"        ) == 0) return wren_ttri;
-    if (strcmp(signature, "static TIC.ttri(_,_,_,_,_,_,_,_,_,_,_,_,_)"      ) == 0) return wren_ttri;
-    if (strcmp(signature, "static TIC.ttri(_,_,_,_,_,_,_,_,_,_,_,_,_,_)"    ) == 0) return wren_ttri;
-    if (strcmp(signature, "static TIC.ttri_depth()"             ) == 0) return wren_ttri_depth;
-    if (strcmp(signature, "static TIC.ttri_depth(_,_,_)"        ) == 0) return wren_ttri_depth;
+    if (strcmp(signature, "static POSI.ttri(_,_,_,_,_,_,_,_,_,_,_,_)"        ) == 0) return wren_ttri;
+    if (strcmp(signature, "static POSI.ttri(_,_,_,_,_,_,_,_,_,_,_,_,_)"      ) == 0) return wren_ttri;
+    if (strcmp(signature, "static POSI.ttri(_,_,_,_,_,_,_,_,_,_,_,_,_,_)"    ) == 0) return wren_ttri;
+    if (strcmp(signature, "static POSI.ttri_depth()"             ) == 0) return wren_ttri_depth;
+    if (strcmp(signature, "static POSI.ttri_depth(_,_,_)"        ) == 0) return wren_ttri_depth;
 
-    if (strcmp(signature, "static TIC.pix(_,_)"                 ) == 0) return wren_pix;
-    if (strcmp(signature, "static TIC.pix(_,_,_)"               ) == 0) return wren_pix;
-    if (strcmp(signature, "static TIC.line(_,_,_,_,_)"          ) == 0) return wren_line;
-    if (strcmp(signature, "static TIC.circ(_,_,_,_)"            ) == 0) return wren_circ;
-    if (strcmp(signature, "static TIC.circb(_,_,_,_)"           ) == 0) return wren_circb;
-    if (strcmp(signature, "static TIC.rect(_,_,_,_,_)"          ) == 0) return wren_rect;
-    if (strcmp(signature, "static TIC.rectb(_,_,_,_,_)"         ) == 0) return wren_rectb;
-    if (strcmp(signature, "static TIC.tri(_,_,_,_,_,_,_)"       ) == 0) return wren_tri;
-    if (strcmp(signature, "static TIC.trib(_,_,_,_,_,_,_)"      ) == 0) return wren_trib;
+    if (strcmp(signature, "static POSI.pix(_,_)"                 ) == 0) return wren_pix;
+    if (strcmp(signature, "static POSI.pix(_,_,_)"               ) == 0) return wren_pix;
+    if (strcmp(signature, "static POSI.line(_,_,_,_,_)"          ) == 0) return wren_line;
+    if (strcmp(signature, "static POSI.circ(_,_,_,_)"            ) == 0) return wren_circ;
+    if (strcmp(signature, "static POSI.circb(_,_,_,_)"           ) == 0) return wren_circb;
+    if (strcmp(signature, "static POSI.rect(_,_,_,_,_)"          ) == 0) return wren_rect;
+    if (strcmp(signature, "static POSI.rectb(_,_,_,_,_)"         ) == 0) return wren_rectb;
+    if (strcmp(signature, "static POSI.tri(_,_,_,_,_,_,_)"       ) == 0) return wren_tri;
+    if (strcmp(signature, "static POSI.trib(_,_,_,_,_,_,_)"      ) == 0) return wren_trib;
 
-    if (strcmp(signature, "static TIC.cls()"                    ) == 0) return wren_cls;
-    if (strcmp(signature, "static TIC.cls(_)"                   ) == 0) return wren_cls;
-    if (strcmp(signature, "static TIC.clip()"                   ) == 0) return wren_clip;
-    if (strcmp(signature, "static TIC.clip(_,_,_,_)"            ) == 0) return wren_clip;
+    if (strcmp(signature, "static POSI.cls()"                    ) == 0) return wren_cls;
+    if (strcmp(signature, "static POSI.cls(_)"                   ) == 0) return wren_cls;
+    if (strcmp(signature, "static POSI.clip()"                   ) == 0) return wren_clip;
+    if (strcmp(signature, "static POSI.clip(_,_,_,_)"            ) == 0) return wren_clip;
 
-    if (strcmp(signature, "static TIC.peek(_)"                  ) == 0) return wren_peek;
-    if (strcmp(signature, "static TIC.poke(_,_)"                ) == 0) return wren_poke;
-    if (strcmp(signature, "static TIC.peek(_,_)"                ) == 0) return wren_peek;
-    if (strcmp(signature, "static TIC.poke(_,_,_)"              ) == 0) return wren_poke;
-    if (strcmp(signature, "static TIC.peek1(_)"                 ) == 0) return wren_peek1;
-    if (strcmp(signature, "static TIC.poke1(_,_)"               ) == 0) return wren_poke1;
-    if (strcmp(signature, "static TIC.peek2(_)"                 ) == 0) return wren_peek2;
-    if (strcmp(signature, "static TIC.poke2(_,_)"               ) == 0) return wren_poke2;
-    if (strcmp(signature, "static TIC.peek4(_)"                 ) == 0) return wren_peek4;
-    if (strcmp(signature, "static TIC.poke4(_,_)"               ) == 0) return wren_poke4;
-    if (strcmp(signature, "static TIC.memcpy(_,_,_)"            ) == 0) return wren_memcpy;
-    if (strcmp(signature, "static TIC.memset(_,_,_)"            ) == 0) return wren_memset;
-    if (strcmp(signature, "static TIC.pmem(_)"                  ) == 0) return wren_pmem;
-    if (strcmp(signature, "static TIC.pmem(_,_)"                ) == 0) return wren_pmem;
+    if (strcmp(signature, "static POSI.peek(_)"                  ) == 0) return wren_peek;
+    if (strcmp(signature, "static POSI.poke(_,_)"                ) == 0) return wren_poke;
+    if (strcmp(signature, "static POSI.peek(_,_)"                ) == 0) return wren_peek;
+    if (strcmp(signature, "static POSI.poke(_,_,_)"              ) == 0) return wren_poke;
+    if (strcmp(signature, "static POSI.peek1(_)"                 ) == 0) return wren_peek1;
+    if (strcmp(signature, "static POSI.poke1(_,_)"               ) == 0) return wren_poke1;
+    if (strcmp(signature, "static POSI.peek2(_)"                 ) == 0) return wren_peek2;
+    if (strcmp(signature, "static POSI.poke2(_,_)"               ) == 0) return wren_poke2;
+    if (strcmp(signature, "static POSI.peek4(_)"                 ) == 0) return wren_peek4;
+    if (strcmp(signature, "static POSI.poke4(_,_)"               ) == 0) return wren_poke4;
+    if (strcmp(signature, "static POSI.memcpy(_,_,_)"            ) == 0) return wren_memcpy;
+    if (strcmp(signature, "static POSI.memset(_,_,_)"            ) == 0) return wren_memset;
+    if (strcmp(signature, "static POSI.pmem(_)"                  ) == 0) return wren_pmem;
+    if (strcmp(signature, "static POSI.pmem(_,_)"                ) == 0) return wren_pmem;
 
-    if (strcmp(signature, "static TIC.sfx(_)"                   ) == 0) return wren_sfx;
-    if (strcmp(signature, "static TIC.sfx(_,_)"                 ) == 0) return wren_sfx;
-    if (strcmp(signature, "static TIC.sfx(_,_,_)"               ) == 0) return wren_sfx;
-    if (strcmp(signature, "static TIC.sfx(_,_,_,_)"             ) == 0) return wren_sfx;
-    if (strcmp(signature, "static TIC.sfx(_,_,_,_,_)"           ) == 0) return wren_sfx;
-    if (strcmp(signature, "static TIC.sfx(_,_,_,_,_,_)"         ) == 0) return wren_sfx;
-    if (strcmp(signature, "static TIC.music()"                  ) == 0) return wren_music;
-    if (strcmp(signature, "static TIC.music(_)"                 ) == 0) return wren_music;
-    if (strcmp(signature, "static TIC.music(_,_)"               ) == 0) return wren_music;
-    if (strcmp(signature, "static TIC.music(_,_,_)"             ) == 0) return wren_music;
-    if (strcmp(signature, "static TIC.music(_,_,_,_)"           ) == 0) return wren_music;
-    if (strcmp(signature, "static TIC.music(_,_,_,_,_)"         ) == 0) return wren_music;
-    if (strcmp(signature, "static TIC.music(_,_,_,_,_,_)"       ) == 0) return wren_music;
-    if (strcmp(signature, "static TIC.music(_,_,_,_,_,_,_)"     ) == 0) return wren_music;
+    if (strcmp(signature, "static POSI.sfx(_)"                   ) == 0) return wren_sfx;
+    if (strcmp(signature, "static POSI.sfx(_,_)"                 ) == 0) return wren_sfx;
+    if (strcmp(signature, "static POSI.sfx(_,_,_)"               ) == 0) return wren_sfx;
+    if (strcmp(signature, "static POSI.sfx(_,_,_,_)"             ) == 0) return wren_sfx;
+    if (strcmp(signature, "static POSI.sfx(_,_,_,_,_)"           ) == 0) return wren_sfx;
+    if (strcmp(signature, "static POSI.sfx(_,_,_,_,_,_)"         ) == 0) return wren_sfx;
+    if (strcmp(signature, "static POSI.music()"                  ) == 0) return wren_music;
+    if (strcmp(signature, "static POSI.music(_)"                 ) == 0) return wren_music;
+    if (strcmp(signature, "static POSI.music(_,_)"               ) == 0) return wren_music;
+    if (strcmp(signature, "static POSI.music(_,_,_)"             ) == 0) return wren_music;
+    if (strcmp(signature, "static POSI.music(_,_,_,_)"           ) == 0) return wren_music;
+    if (strcmp(signature, "static POSI.music(_,_,_,_,_)"         ) == 0) return wren_music;
+    if (strcmp(signature, "static POSI.music(_,_,_,_,_,_)"       ) == 0) return wren_music;
+    if (strcmp(signature, "static POSI.music(_,_,_,_,_,_,_)"     ) == 0) return wren_music;
 
-    if (strcmp(signature, "static TIC.time()"                   ) == 0) return wren_time;
-    if (strcmp(signature, "static TIC.tstamp()"                 ) == 0) return wren_tstamp;
-    if (strcmp(signature, "static TIC.vbank()"                  ) == 0) return wren_vbank;
-    if (strcmp(signature, "static TIC.vbank(_)"                 ) == 0) return wren_vbank;
-    if (strcmp(signature, "static TIC.sync()"                   ) == 0) return wren_sync;
-    if (strcmp(signature, "static TIC.sync(_)"                  ) == 0) return wren_sync;
-    if (strcmp(signature, "static TIC.sync(_,_)"                ) == 0) return wren_sync;
-    if (strcmp(signature, "static TIC.sync(_,_,_)"              ) == 0) return wren_sync;
-    if (strcmp(signature, "static TIC.reset()"                  ) == 0) return wren_reset;
-    if (strcmp(signature, "static TIC.exit()"                   ) == 0) return wren_exit;
-    if (strcmp(signature, "static TIC.fget(_,_)"                ) == 0) return wren_fget;
-    if (strcmp(signature, "static TIC.fset(_,_,_)"              ) == 0) return wren_fset;
+    if (strcmp(signature, "static POSI.time()"                   ) == 0) return wren_time;
+    if (strcmp(signature, "static POSI.tstamp()"                 ) == 0) return wren_tstamp;
+    if (strcmp(signature, "static POSI.vbank()"                  ) == 0) return wren_vbank;
+    if (strcmp(signature, "static POSI.vbank(_)"                 ) == 0) return wren_vbank;
+    if (strcmp(signature, "static POSI.sync()"                   ) == 0) return wren_sync;
+    if (strcmp(signature, "static POSI.sync(_)"                  ) == 0) return wren_sync;
+    if (strcmp(signature, "static POSI.sync(_,_)"                ) == 0) return wren_sync;
+    if (strcmp(signature, "static POSI.sync(_,_,_)"              ) == 0) return wren_sync;
+    if (strcmp(signature, "static POSI.reset()"                  ) == 0) return wren_reset;
+    if (strcmp(signature, "static POSI.exit()"                   ) == 0) return wren_exit;
+    if (strcmp(signature, "static POSI.fget(_,_)"                ) == 0) return wren_fget;
+    if (strcmp(signature, "static POSI.fset(_,_,_)"              ) == 0) return wren_fset;
 
     // internal functions
-    if (strcmp(signature, "static TIC.map_width__"              ) == 0) return wren_map_width;
-    if (strcmp(signature, "static TIC.map_height__"             ) == 0) return wren_map_height;
-    if (strcmp(signature, "static TIC.spritesize__"             ) == 0) return wren_spritesize;
-    if (strcmp(signature, "static TIC.print__(_,_,_,_,_,_,_)"   ) == 0) return wren_print;
-    if (strcmp(signature, "static TIC.trace__(_,_)"             ) == 0) return wren_trace;
-    if (strcmp(signature, "static TIC.spr__(_,_,_,_,_,_,_)"     ) == 0) return wren_spr_internal;
-    if (strcmp(signature, "static TIC.mgeti__(_)"               ) == 0) return wren_mgeti;
+    if (strcmp(signature, "static POSI.map_width__"              ) == 0) return wren_map_width;
+    if (strcmp(signature, "static POSI.map_height__"             ) == 0) return wren_map_height;
+    if (strcmp(signature, "static POSI.spritesize__"             ) == 0) return wren_spritesize;
+    if (strcmp(signature, "static POSI.print__(_,_,_,_,_,_,_)"   ) == 0) return wren_print;
+    if (strcmp(signature, "static POSI.trace__(_,_)"             ) == 0) return wren_trace;
+    if (strcmp(signature, "static POSI.spr__(_,_,_,_,_,_,_)"     ) == 0) return wren_spr_internal;
+    if (strcmp(signature, "static POSI.mgeti__(_)"               ) == 0) return wren_mgeti;
 
     return NULL;
 }
@@ -1585,7 +1585,7 @@ static void initAPI(tic_core* core)
 
     if (wrenInterpret(core->currentVM, "main", tic_wren_api) != WREN_RESULT_SUCCESS)
     {
-        core->data->error(core->data->data, "can't load TIC wren api");
+        core->data->error(core->data->data, "can't load POSI wren api");
     }
 }
 

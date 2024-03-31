@@ -777,7 +777,7 @@ s7_pointer scheme_error_handler(s7_scheme* sc, s7_pointer args)
     return s7_nil(sc);
 }
 
-static const char* ticFnName = "TIC";
+static const char* ticFnName = "TICK";
 
 static const char* defstructStr = "  \n\
 (define-macro (defstruct name . args) \n\
@@ -826,7 +826,7 @@ static bool initScheme(tic_mem* tic, const char* code)
     const bool isTicDefined = s7_is_defined(sc, ticFnName);
     if (!isTicDefined) {
         if (core->data) {
-            core->data->error(core->data->data, "TIC function is not defined");
+            core->data->error(core->data->data, "TICK function is not defined");
         }
     }
 
@@ -861,7 +861,7 @@ static void callSchemeScanline(tic_mem* tic, s32 row, void* data)
     tic_core* core = (tic_core*)tic;
     s7_scheme* sc = core->currentVM;
 
-    static const char* scnFnName = "SCN";
+    static const char* scnFnName = "SCAN";
     const bool isScnDefined = s7_is_defined(sc, scnFnName);
     if (isScnDefined) {
         s7_call(sc, s7_name_to_value(sc, scnFnName), s7_cons(sc, s7_make_integer(sc, row), s7_nil(sc)));
@@ -873,7 +873,7 @@ static void callSchemeBorder(tic_mem* tic, s32 row, void* data)
     tic_core* core = (tic_core*)tic;
     s7_scheme* sc = core->currentVM;
 
-    static const char* bdrFnName = "BDR";
+    static const char* bdrFnName = "BRDR";
     bool isBdrDefined = s7_is_defined(sc, bdrFnName);
     if (isBdrDefined) {
         s7_call(sc, s7_name_to_value(sc, bdrFnName), s7_cons(sc, s7_make_integer(sc, row), s7_nil(sc)));

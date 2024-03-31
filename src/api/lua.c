@@ -1644,7 +1644,7 @@ void callLuaTick(tic_mem* tic)
         else 
         {       
             lua_pop(lua, 1);
-            core->data->error(core->data->data, "'function TIC()...' isn't found :(");
+            core->data->error(core->data->data, "'function TICK()...' isn't found :(");
         }
     }
 }

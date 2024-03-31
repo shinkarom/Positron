@@ -1383,13 +1383,10 @@ static void onDirDone(void* ctx)
         free((void*)item->name);
     }
 
-    if (data->count == 0)
+    if (data->count != 0)
     {
-        printBack(console, "\n\nuse ");
-        printFront(console, "DEMO");
-        printBack(console, " command to install demo carts");
+        free(data->items);
     }
-    else free(data->items);
 
     printLine(console);
     commandDone(console);
@@ -1504,130 +1501,6 @@ static void onClsCommand(Console* console)
     printf("\r");
 
     commandDoneLine(console, false);
-}
-
-static void onInstallDemosCommand(Console* console)
-{
-    tic_fs* fs = console->fs;
-    u8* data = (u8*)newCart();
-
-    SCOPE(free(data))
-    {
-        printBack(console, "\nadded carts:\n\n");
-
-#if defined(TIC_BUILD_WITH_LUA)
-
-        static const u8 demofire[] =
-        {
-            #include "../build/assets/fire.posi.dat"
-        };
-
-        static const u8 demop3d[] =
-        {
-            #include "../build/assets/p3d.posi.dat"
-        };
-
-        static const u8 demosfx[] =
-        {
-            #include "../build/assets/sfx.posi.dat"
-        };
-
-        static const u8 demopalette[] =
-        {
-            #include "../build/assets/palette.posi.dat"
-        };
-
-        static const u8 demofont[] =
-        {
-            #include "../build/assets/font.posi.dat"
-        };
-
-        static const u8 demomusic[] =
-        {
-            #include "../build/assets/music.posi.dat"
-        };
-
-        static const u8 demoquest[] =
-        {
-            #include "../build/assets/quest.posi.dat"
-        };
-
-        static const u8 demotetris[] =
-        {
-            #include "../build/assets/tetris.posi.dat"
-        };
-
-        static const u8 demobenchmark[] =
-        {
-            #include "../build/assets/benchmark.posi.dat"
-        };
-
-        static const u8 demobpp[] =
-        {
-            #include "../build/assets/bpp.posi.dat"
-        };
-
-        static const u8 democar[] =
-        {
-            #include "../build/assets/car.posi.dat"
-        };
-
-#define DEMOS_LIST(macro)       \
-        macro(fire)             \
-        macro(font)             \
-        macro(music)            \
-        macro(p3d)              \
-        macro(palette)          \
-        macro(quest)            \
-        macro(sfx)              \
-        macro(tetris)           \
-        macro(benchmark)        \
-        macro(bpp)              \
-        macro(car)
-
-        static const struct Demo {const char* name; const u8* data; s32 size;} Demos[] =
-        {
-#define     DEMOS_DEF(name) {#name ".posi", demo ## name, sizeof demo ## name},
-            DEMOS_LIST(DEMOS_DEF)
-#undef      DEMOS_DEF
-        };
-
-#undef  DEMOS_LIST
-
-        FOR(const struct Demo*, demo, Demos)
-        {
-            tic_fs_save(fs, demo->name, data, tic_tool_unzip(data, sizeof(tic_cartridge), demo->data, demo->size), true);
-            printFront(console, demo->name);
-            printLine(console);
-        }
-#endif
-
-        static const char* Bunny = "bunny";
-
-        tic_fs_makedir(fs, Bunny);
-        tic_fs_changedir(fs, Bunny);
-
-        FOR_EACH_LANG(ln)
-        {
-            tic_script_config_extra* ex = getConfigExtra(ln);
-            if (ex->markRom != NULL) { // having a Mark is not mandatory
-                char cartname[1024];
-                strcpy(cartname, ln->name);
-                strcat(cartname, "mark.posi");
-
-                tic_fs_save(fs, cartname, data, tic_tool_unzip(data, sizeof(tic_cartridge), ex->markRom, ex->markRomSize), true);
-                printFront(console, Bunny);
-                printFront(console, "/");
-                printFront(console, cartname);
-                printLine(console);
-            }
-        }
-	FOR_EACH_LANG_END
-
-        tic_fs_dirback(fs);
-    }
-
-    commandDone(console);
 }
 
 static void onGameMenuCommand(Console* console)
@@ -2772,14 +2645,6 @@ static const char HelpUsage[] = "help [<text>"
         "clear console screen.",                                                        \
         NULL,                                                                           \
         onClsCommand,                                                                   \
-        NULL,                                                                           \
-        NULL)                                                                           \
-                                                                                        \
-    macro("demo",                                                                       \
-        NULL,                                                                           \
-        "install demo carts to the current directory.",                                 \
-        NULL,                                                                           \
-        onInstallDemosCommand,                                                          \
         NULL,                                                                           \
         NULL)                                                                           \
                                                                                         \

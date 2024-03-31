@@ -1115,7 +1115,7 @@ static void callJanetTick(tic_mem* tic)
     (void)janet_resolve(core->currentVM, janet_csymbol(TIC_FN), &pre_fn);
 
     if (janet_type(pre_fn) != JANET_FUNCTION) {
-        core->data->error(core->data->data, "(TIC) isn't found :(");
+        core->data->error(core->data->data, "(TICK) isn't found :(");
         return;
     }
 

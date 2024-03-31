@@ -12,7 +12,7 @@
 (define x 96)
 (define y 24)
 
-(define (TIC)
+(define (TICK)
   (if (t80::btn 0) (inc! y -1))
   (if (t80::btn 1) (inc! y 1))
   (if (t80::btn 2) (inc! x -1))

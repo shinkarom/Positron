@@ -15,7 +15,7 @@
 (var x 96)
 (var y 24)
 
-(defn TIC []
+(defn TICK []
   (when (tic80/btn 0) (-- y))
   (when (tic80/btn 1) (++ y))
   (when (tic80/btn 2) (-- x))

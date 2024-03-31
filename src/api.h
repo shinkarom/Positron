@@ -156,11 +156,11 @@ enum
 #undef TIC_SYNC_DEF
 };
 
-#define TIC_FN  "TIC"
+#define TIC_FN  "TICK"
 #define BOOT_FN "BOOT"
-#define SCN_FN  "SCN"
-#define OVR_FN  "OVR" // deprecated since v1.0
-#define BDR_FN  "BDR"
+#define SCN_FN  "SCAN" // deprecated since v1.0
+#define OVR_FN  "OVER" 
+#define BDR_FN  "BRDR"
 #define MENU_FN "MENU"
 
 #define TIC_CALLBACK_LIST(macro)                                                                                    \

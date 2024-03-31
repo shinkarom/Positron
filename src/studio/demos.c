@@ -9,17 +9,11 @@ static const u8 LuaDemoRom[] =
 {
     #include "../build/assets/luademo.posi.dat"
 };
-static const u8 LuaMarkRom[] =
-{
-    #include "../build/assets/luamark.posi.dat"
-};
 tic_script_config_extra LuaSyntaxConfigExtra =
 {
     .name                  = "lua",
     .demoRom               = LuaDemoRom,
     .demoRomSize           = sizeof LuaDemoRom,
-    .markRom               = LuaMarkRom,
-    .markRomSize           = sizeof LuaMarkRom,
 };
 #endif
 
@@ -28,17 +22,11 @@ static const u8 MoonDemoRom[] =
 {
     #include "../build/assets/moondemo.posi.dat"
 };
-static const u8 MoonMarkRom[] =
-{
-    #include "../build/assets/moonmark.posi.dat"
-};
 tic_script_config_extra MoonSyntaxConfigExtra =
 {
     .name               = "moon",
     .demoRom            = MoonDemoRom,
     .demoRomSize        = sizeof MoonDemoRom,
-    .markRom            = MoonMarkRom,
-    .markRomSize        = sizeof MoonMarkRom,
 };
 #endif
 
@@ -47,20 +35,12 @@ static const u8 FennelDemoRom[] =
 {
     #include "../build/assets/fenneldemo.posi.dat"
 };
-/* does not exists
-static const u8 FennelMarkRom[] =
-{
-    #include "../build/assets/fennelmark.posi.dat"
-};
-*/
 
 tic_script_config_extra FennelSyntaxConfigExtra =
 {
     .name               = "fennel",
     .demoRom            = FennelDemoRom,
     .demoRomSize        = sizeof FennelDemoRom,
-    .markRom            = NULL,
-    .markRomSize        = 0,
 };
 #endif
 
@@ -72,18 +52,11 @@ static const u8 JsDemoRom[] =
     #include "../build/assets/jsdemo.posi.dat"
 };
 
-static const u8 jsmark[] =
-{
-    #include "../build/assets/jsmark.posi.dat"
-};
-
 tic_script_config_extra JsSyntaxConfigExtra =
 {
     .name               = "js",
     .demoRom            = JsDemoRom,
     .demoRomSize        = sizeof JsDemoRom,
-    .markRom            = jsmark,
-    .markRomSize        = sizeof jsmark,
 };
 
 #endif
@@ -95,18 +68,11 @@ static const u8 RubyDemoRom[] =
     #include "../build/assets/rubydemo.posi.dat"
 };
 
-static const u8 rubymark[] =
-{
-    #include "../build/assets/rubymark.posi.dat"
-};
-
 tic_script_config_extra MRubySyntaxConfigExtra =
 {
     .name               = "ruby",
     .demoRom            = RubyDemoRom,
     .demoRomSize        = sizeof RubyDemoRom,
-    .markRom            = rubymark,
-    .markRomSize        = sizeof rubymark,
 };
 
 #endif
@@ -118,18 +84,11 @@ static const u8 WrenDemoRom[] =
     #include "../build/assets/wrendemo.posi.dat"
 };
 
-static const u8 wrenmark[] =
-{
-    #include "../build/assets/wrenmark.posi.dat"
-};
-
 tic_script_config_extra WrenSyntaxConfigExtra =
 {
     .name               = "wren",
     .demoRom            = WrenDemoRom,
     .demoRomSize        = sizeof WrenDemoRom,
-    .markRom            = wrenmark,
-    .markRomSize        = sizeof wrenmark,
 };
 
 #endif
@@ -140,17 +99,11 @@ static const u8 SchemeDemoRom[] =
     #include "../build/assets/schemedemo.posi.dat"
 };
 
-static const u8 schememark[] =
-{
-    #include "../build/assets/schememark.posi.dat"
-};
 tic_script_config_extra SchemeSyntaxConfigExtra =
 {
     .name               = "scheme",
     .demoRom            = SchemeDemoRom,
     .demoRomSize        = sizeof SchemeDemoRom,
-    .markRom            = schememark,
-    .markRomSize        = sizeof schememark,
 };
 #endif
 
@@ -161,17 +114,11 @@ static const u8 SquirrelDemoRom[] =
     #include "../build/assets/squirreldemo.posi.dat"
 };
 
-static const u8 squirrelmark[] =
-{
-    #include "../build/assets/squirrelmark.posi.dat"
-};
 tic_script_config_extra SquirrelSyntaxConfigExtra =
 {
     .name               = "squirrel",
     .demoRom            = SquirrelDemoRom,
     .demoRomSize        = sizeof SquirrelDemoRom,
-    .markRom            = squirrelmark,
-    .markRomSize        = sizeof squirrelmark,
 };
 #endif
 
@@ -183,18 +130,11 @@ static const u8 WasmDemoRom[] =
     #include "../build/assets/wasmdemo.posi.dat"
 };
 
-static const u8 wasmmark[] =
-{
-    #include "../build/assets/wasmmark.posi.dat"
-};
-
 tic_script_config_extra WasmSyntaxConfigExtra =
 {
     .name               = "wasm",
     .demoRom            = WasmDemoRom,
     .demoRomSize        = sizeof WasmDemoRom,
-    .markRom            = wasmmark,
-    .markRomSize        = sizeof wasmmark,
 };
 
 #endif
@@ -206,18 +146,11 @@ static const u8 JanetDemoRom[] =
 #include "../build/assets/janetdemo.posi.dat"
   };
 
-static const u8 janetmark[] =
-  {
-#include "../build/assets/janetmark.posi.dat"
-  };
-
 tic_script_config_extra JanetSyntaxConfigExtra =
   {
     .name               = "janet",
     .demoRom            = JanetDemoRom,
     .demoRomSize        = sizeof JanetDemoRom,
-    .markRom            = janetmark,
-    .markRomSize        = sizeof janetmark,
   };
 
 #endif
@@ -229,18 +162,11 @@ static const u8 PythonDemoRom[] =
 #include "../build/assets/pythondemo.posi.dat"
   };
 
-static const u8 pythonmark[] =
-  {
-#include "../build/assets/pythonmark.posi.dat"
-  };
-
 tic_script_config_extra PythonSyntaxConfigExtra =
   {
     .name               = "python",
     .demoRom            = PythonDemoRom,
     .demoRomSize        = sizeof PythonDemoRom,
-    .markRom            = pythonmark,
-    .markRomSize        = sizeof pythonmark,
   };
 
 #endif

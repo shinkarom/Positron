@@ -10,7 +10,7 @@ t=0
 x=96
 y=24
 
-def TIC():
+def TICK():
  global t
  global x
  global y

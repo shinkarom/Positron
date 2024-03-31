@@ -1112,7 +1112,7 @@ static void callJavascriptTick(tic_mem* tic)
 #endif
             }
         }
-        else core->data->error(core->data->data, "'function TIC()...' isn't found :(");
+        else core->data->error(core->data->data, "'function TICK()...' isn't found :(");
 
         JS_FreeValue(ctx, func);
         JS_FreeValue(ctx, global);

@@ -10,7 +10,7 @@ t<-0
 x<-96
 y<-24
 
-function TIC()
+function TICK()
 {
 	if (btn(0)) y=y-1;
 	if (btn(1)) y=y+1;

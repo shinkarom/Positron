@@ -6,7 +6,7 @@
 // version: 0.1
 // script:  wren
 
-class Game is TIC{
+class Game is POSI{
 
 	construct new(){
 		_t=0
@@ -14,23 +14,23 @@ class Game is TIC{
 		_y=24
 	}
 	
-	TIC(){
-		if(TIC.btn(0)){
+	TICK(){
+		if(POSI.btn(0)){
 			_y=_y-1
 		}
-		if(TIC.btn(1)){
+		if(POSI.btn(1)){
 			_y=_y+1
 		}
-		if(TIC.btn(2)){
+		if(POSI.btn(2)){
 			_x=_x-1
 		}
-		if(TIC.btn(3)){
+		if(POSI.btn(3)){
 			_x=_x+1
 		}
 		
-		TIC.cls(13)
-		TIC.spr(1+((_t%60)/30|0)*2,_x,_y,14,3,0,0,2,2)
-		TIC.print("HELLO WORLD!",84,84)
+		POSI.cls(13)
+		POSI.spr(1+((_t%60)/30|0)*2,_x,_y,14,3,0,0,2,2)
+		POSI.print("HELLO WORLD!",84,84)
 		
 		_t=_t+1
 	}

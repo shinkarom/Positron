@@ -10,7 +10,7 @@ var mascot : TICGuy = .{};
 
 export fn BOOT() void {}
 
-export fn TIC() void {
+export fn TICK() void {
     tic.sync(.{
         .sections = .{.tiles = true},
         .bank = 1,
@@ -42,6 +42,6 @@ export fn TIC() void {
     t += 1;
 }
 
-export fn BDR() void {}
+export fn BRDR() void {}
 
-export fn OVR() void {}
+export fn OVER() void {}

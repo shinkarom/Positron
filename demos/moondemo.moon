@@ -10,7 +10,7 @@ t=0
 x=96
 y=24
 
-export TIC=->
+export TICK=->
   if btn 0
     y-=1
   if btn 1

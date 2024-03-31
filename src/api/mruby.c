@@ -1084,7 +1084,7 @@ static void callMRubyTick(tic_mem* tic)
         }
         else
         {
-            machine->data->error(machine->data->data, "'def TIC...' isn't found :(");
+            machine->data->error(machine->data->data, "'def TICK...' isn't found :(");
         }
     }
 }

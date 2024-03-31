@@ -1666,7 +1666,7 @@ static void callSquirrelTick(tic_mem* tic)
         {       
             sq_pop(vm, 1);
             if (core->data)
-                core->data->error(core->data->data, "'function TIC()...' isn't found :(");
+                core->data->error(core->data->data, "'function TICK()...' isn't found :(");
         }
     }
 }

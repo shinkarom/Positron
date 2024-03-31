@@ -10,7 +10,7 @@ var t=0
 var x=96
 var y=24
 
-function TIC()
+function TICK()
 {
 	if(btn(0))y--
 	if(btn(1))y++

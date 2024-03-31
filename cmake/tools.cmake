@@ -43,24 +43,11 @@ if(BUILD_DEMO_CARTS)
     endif()
 
     if(BUILD_WITH_LUA)
-        list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/quest.lua)
-        list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/car.lua)
-        list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/music.lua)
-        list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/sfx.lua)
-        list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/palette.lua)
-        list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/bpp.lua)
-        list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/tetris.lua)
-        list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/font.lua)
-        list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/fire.lua)
-        list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/benchmark.lua)
-        list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/p3d.lua)
         list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/luademo.lua)
-        list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/bunny/luamark.lua)
     endif()
 
     if(BUILD_WITH_MOON)
         list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/moondemo.moon)
-        list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/bunny/moonmark.moon)
     endif()
 
     if(BUILD_WITH_FENNEL)
@@ -69,37 +56,30 @@ if(BUILD_DEMO_CARTS)
 
     if(BUILD_WITH_JS)
         list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/jsdemo.js)
-        list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/bunny/jsmark.js)
     endif()
 
     if(BUILD_WITH_SCHEME)
         list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/schemedemo.scm)
-        list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/bunny/schememark.scm)
     endif()
 
     if(BUILD_WITH_SQUIRREL)
         list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/squirreldemo.nut)
-        list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/bunny/squirrelmark.nut)
     endif()
 
     if(BUILD_WITH_PYTHON)
         list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/pythondemo.py)
-        list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/bunny/pythonmark.py)
     endif()
 
     if(BUILD_WITH_WREN)
         list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/wrendemo.wren)
-        list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/bunny/wrenmark.wren)
     endif()
 
     if(BUILD_WITH_MRUBY)
         list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/rubydemo.rb)
-        list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/bunny/rubymark.rb)
     endif()
 
     if(BUILD_WITH_JANET)
         list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/janetdemo.janet)
-        list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/bunny/janetmark.janet)
     endif()
 
     foreach(CART_FILE ${DEMO_CARTS})
@@ -126,7 +106,6 @@ if(BUILD_DEMO_CARTS)
 
         file(GLOB WASM_DEMOS
             ${DEMO_CARTS_IN}/wasm/*.wasmp
-            ${DEMO_CARTS_IN}/bunny/wasmmark/*.wasmp
         )
 
         foreach(CART_FILE ${WASM_DEMOS})
