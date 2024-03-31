@@ -11,31 +11,9 @@
 # is provided as a module.
 (import tic80)
 
-(var t 0)
-(var x 96)
-(var y 24)
-
 (defn TICK []
-  (when (tic80/btn 0) (-- y))
-  (when (tic80/btn 1) (++ y))
-  (when (tic80/btn 2) (-- x))
-  (when (tic80/btn 3) (++ x))
-  (tic80/cls 13)
-  (tic80/spr (if (> (% t 60) 30) 1 3)
-          x y 14 3 0 0 2 2)
-  (tic80/print "HELLO WORLD!" 84 84)
-  (++ t))
-
-# <TILES>
-# 001:eccccccccc888888caaaaaaaca888888cacccccccacc0ccccacc0ccccacc0ccc
-# 002:ccccceee8888cceeaaaa0cee888a0ceeccca0ccc0cca0c0c0cca0c0c0cca0c0c
-# 003:eccccccccc888888caaaaaaaca888888cacccccccacccccccacc0ccccacc0ccc
-# 004:ccccceee8888cceeaaaa0cee888a0ceeccca0cccccca0c0c0cca0c0c0cca0c0c
-# 017:cacccccccaaaaaaacaaacaaacaaaaccccaaaaaaac8888888cc000cccecccccec
-# 018:ccca00ccaaaa0ccecaaa0ceeaaaa0ceeaaaa0cee8888ccee000cceeecccceeee
-# 019:cacccccccaaaaaaacaaacaaacaaaaccccaaaaaaac8888888cc000cccecccccec
-# 020:ccca00ccaaaa0ccecaaa0ceeaaaa0ceeaaaa0cee8888ccee000cceeecccceeee
-# </TILES>
+  (tic80/cls 0)
+  )
 
 # <WAVES>
 # 000:00000000ffffffff00000000ffffffff

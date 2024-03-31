@@ -6,46 +6,16 @@
 // version: 0.1
 // script:  wren
 
-class Game is POSI{
+class Game is POSI{	
 
 	construct new(){
-		_t=0
-		_x=96
-		_y=24
-	}
 	
-	TICK(){
-		if(POSI.btn(0)){
-			_y=_y-1
-		}
-		if(POSI.btn(1)){
-			_y=_y+1
-		}
-		if(POSI.btn(2)){
-			_x=_x-1
-		}
-		if(POSI.btn(3)){
-			_x=_x+1
-		}
-		
-		POSI.cls(13)
-		POSI.spr(1+((_t%60)/30|0)*2,_x,_y,14,3,0,0,2,2)
-		POSI.print("HELLO WORLD!",84,84)
-		
-		_t=_t+1
+	}
+
+	TICK(){		
+		POSI.cls(0)
 	}
 }
-
-// <TILES>
-// 001:eccccccccc888888caaaaaaaca888888cacccccccacc0ccccacc0ccccacc0ccc
-// 002:ccccceee8888cceeaaaa0cee888a0ceeccca0ccc0cca0c0c0cca0c0c0cca0c0c
-// 003:eccccccccc888888caaaaaaaca888888cacccccccacccccccacc0ccccacc0ccc
-// 004:ccccceee8888cceeaaaa0cee888a0ceeccca0cccccca0c0c0cca0c0c0cca0c0c
-// 017:cacccccccaaaaaaacaaacaaacaaaaccccaaaaaaac8888888cc000cccecccccec
-// 018:ccca00ccaaaa0ccecaaa0ceeaaaa0ceeaaaa0cee8888ccee000cceeecccceeee
-// 019:cacccccccaaaaaaacaaacaaacaaaaccccaaaaaaac8888888cc000cccecccccec
-// 020:ccca00ccaaaa0ccecaaa0ceeaaaa0ceeaaaa0cee8888ccee000cceeecccceeee
-// </TILES>
 
 // <WAVES>
 // 000:00000000ffffffff00000000ffffffff

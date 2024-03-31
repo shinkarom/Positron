@@ -7,31 +7,10 @@
 ;; script:  fennel
 ;; strict:  true
 
-(var t 0)
-(var x 96)
-(var y 24)
-
 (fn _G.TICK []
-  (when (btn 0) (set y (- y 1)))
-  (when (btn 1) (set y (+ y 1)))
-  (when (btn 2) (set x (- x 1)))
-  (when (btn 3) (set x (+ x 1)))
   (cls 0)
-  (spr (+ 1 (* (// (% t 60) 30) 2))
-       x y 14 3 0 0 2 2)
-  (print "HELLO WORLD!" 84 84)
-  (set t (+ t 1)))
+  )
 
-;; <TILES>
-;; 001:eccccccccc888888caaaaaaaca888888cacccccccacc0ccccacc0ccccacc0ccc
-;; 002:ccccceee8888cceeaaaa0cee888a0ceeccca0ccc0cca0c0c0cca0c0c0cca0c0c
-;; 003:eccccccccc888888caaaaaaaca888888cacccccccacccccccacc0ccccacc0ccc
-;; 004:ccccceee8888cceeaaaa0cee888a0ceeccca0cccccca0c0c0cca0c0c0cca0c0c
-;; 017:cacccccccaaaaaaacaaacaaacaaaaccccaaaaaaac8888888cc000cccecccccec
-;; 018:ccca00ccaaaa0ccecaaa0ceeaaaa0ceeaaaa0cee8888ccee000cceeecccceeee
-;; 019:cacccccccaaaaaaacaaacaaacaaaaccccaaaaaaac8888888cc000cccecccccec
-;; 020:ccca00ccaaaa0ccecaaa0ceeaaaa0ceeaaaa0cee8888ccee000cceeecccceeee
-;; </TILES>
 
 ;; <WAVES>
 ;; 000:00000000ffffffff00000000ffffffff
