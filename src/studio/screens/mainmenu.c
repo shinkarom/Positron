@@ -349,7 +349,6 @@ static const MenuItem OptionMenu[] =
     {"FULLSCREEN",      NULL,   &FullscreenOption},
     {"INTEGER SCALE",   NULL,   &IntegerScaleOption},
     {"VOLUME",          NULL,   &VolumeOption},
-    {"AUTOSAVE",        NULL,   &AutoSaveOption, "Keep carts loaded from the web"},
 #if defined(BUILD_EDITORS)
     {"EDITOR OPTIONS", showEditorMenu},
 #endif
@@ -504,7 +503,7 @@ static const MenuItem MainMenu[] =
 #endif
     {"OPTIONS",     showOptionsMenu},
     {""},
-    {"QUIT TIC-80", onExitStudio},
+    {"QUIT POSITRON", onExitStudio},
 };
 
 static void showMainMenu(void* data, s32 pos)

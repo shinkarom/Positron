@@ -86,7 +86,7 @@ static void drawTopToolbar(Surf* surf, s32 x, s32 y)
     tic_api_rect(tic, x, y + Height, TIC80_WIDTH, 1, tic_color_black);
 
     {
-        static const char Label[] = "TIC-80 SURF";
+        static const char Label[] = "POSITRON SURF";
         s32 xl = x + MAIN_OFFSET;
         s32 yl = y + (Height - TIC_FONT_HEIGHT)/2;
         tic_api_print(tic, Label, xl, yl+1, tic_color_black, true, 1, false);
@@ -477,27 +477,9 @@ static void changeDirectory(Surf* surf, const char* name)
     }
 }
 
-static void autoSave(Surf* surf)
-{
-    const char* save_directory = "/downloads";
-    const char* cart_name = surf->console->rom.name;
-
-    if(!tic_fs_isdir(surf->console->fs, save_directory))
-    {
-        tic_fs_makedir(surf->console->fs, save_directory);
-    }
-
-    forceAutoSave(surf->console, cart_name);
-}
-
 static void onCartLoaded(void* data)
 {
     Surf* surf = data;
-
-    if(surf->config->data.options.autosave)
-    {
-        autoSave(surf);
-    }
 
     runGame(surf->studio);
 }
