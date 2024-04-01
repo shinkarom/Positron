@@ -1,9 +1,3 @@
-# title:   game title
-# author:  game developers, email, etc.
-# desc:    short description
-# site:    website link
-# license: MIT License (change this to your license of choice)
-# version: 0.1
 # script:  python
 
 def TICK():
