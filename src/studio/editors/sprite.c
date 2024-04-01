@@ -1324,6 +1324,7 @@ static void drawSheetVBank1(Sprite* sprite, s32 x, s32 y)
 
     tic_api_rectb(tic, rect.x - 1, rect.y - 1, rect.w + 2, rect.h + 2, tic_color_white);
 
+	/*
     for(s32 i = 1; i < rect.h; i += 4)
     {
         if (sprite->blit.page > 0) 
@@ -1338,6 +1339,7 @@ static void drawSheetVBank1(Sprite* sprite, s32 x, s32 y)
             tic_api_pix(tic, rect.x+rect.w, rect.y + i + 1, tic_color_black, false);
         }
     }
+	*/
 
     if(checkMousePos(sprite->studio, &rect))
     {
@@ -1366,18 +1368,19 @@ static void drawSheet(Sprite* sprite, s32 x, s32 y)
     {
         tic_point start = 
         {
-            x - blit.page * TIC_SPRITESHEET_SIZE + sprite->anim.pos.page,
-            y - blit.bank * TIC_SPRITESHEET_SIZE + sprite->anim.pos.bank
+			x - blit.page * TIC_SPRITESHEET_SIZE,
+            y - blit.bank * TIC_SPRITESHEET_SIZE
         }, pos = start;
 
-        for(blit.bank = 0; blit.bank < TIC_SPRITE_BANKS; ++blit.bank, pos.y += TIC_SPRITESHEET_SIZE, pos.x = start.x)
-        {
-            for(blit.page = 0; blit.page < blit.pages; ++blit.page, pos.x += TIC_SPRITESHEET_SIZE)
-            {
+       // for(blit.bank = 0; blit.bank < TIC_SPRITE_BANKS; ++blit.bank, pos.y += TIC_SPRITESHEET_SIZE, pos.x = start.x)
+       // {
+       //     for(blit.page = 0; blit.page < blit.pages; ++blit.page, pos.x += TIC_SPRITESHEET_SIZE)
+       //     {
                 tic->ram->vram.blit.segment = tic_blit_calc_segment(&blit);
-                tic_api_spr(tic, 0, pos.x, pos.y, TIC_SPRITESHEET_COLS, TIC_SPRITESHEET_COLS, NULL, 0, 1, tic_no_flip, tic_no_rotate);
-            }
-        }
+                tic_api_spr(tic, 0, x, y, TIC_SPRITESHEET_COLS, TIC_SPRITESHEET_COLS, NULL, 0, 1, tic_no_flip, tic_no_rotate);
+       //     }
+       // }
+		
     }
 }
 
@@ -2036,6 +2039,8 @@ static void tick(Sprite* sprite)
             {PaletteX + PaletteW, PaletteY, SheetX - PaletteX - PaletteW, PaletteH},
 
             {0, PaletteY + PaletteH, SheetX, TIC80_HEIGHT - PaletteY - PaletteH},
+			
+			{SheetX, SheetY+TIC_SPRITESHEET_SIZE, TIC80_WIDTH-SheetX, TIC80_HEIGHT-SheetY+TIC_SPRITESHEET_SIZE},
         };
 
         memcpy(tic->ram->vram.palette.data, getConfig(sprite->studio)->cart->bank0.palette.vbank0.data, sizeof(tic_palette));

@@ -59,7 +59,7 @@
 #define CONSOLE_CURSOR_COLOR        tic_color_red
 #define CONSOLE_INPUT_COLOR         tic_color_white
 #define CONSOLE_BACK_TEXT_COLOR     tic_color_grey
-#define CONSOLE_FRONT_TEXT_COLOR    tic_color_light_grey
+#define CONSOLE_FRONT_TEXT_COLOR    tic_color_white
 #define CONSOLE_ERROR_TEXT_COLOR    tic_color_red
 #define CONSOLE_LINK_TEXT_COLOR     tic_color_blue
 #define CONSOLE_CURSOR_BLINK_PERIOD TIC80_FRAMERATE

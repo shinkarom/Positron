@@ -31,7 +31,7 @@ extern "C" {
 #endif
 
 #define TIC80_WIDTH             240
-#define TIC80_HEIGHT            136
+#define TIC80_HEIGHT            176
 #define TIC80_FULLWIDTH_BITS    8
 #define TIC80_FULLWIDTH         (1 << TIC80_FULLWIDTH_BITS)
 #define TIC80_FULLHEIGHT        (TIC80_FULLWIDTH*3/4)
