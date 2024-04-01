@@ -31,7 +31,6 @@ struct Surf
     Studio* studio;
     tic_mem* tic;
     struct tic_fs* fs;
-    struct tic_net* net;
     struct Console* console;
     struct Config* config;
 

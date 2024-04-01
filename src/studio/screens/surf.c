@@ -22,7 +22,6 @@
 
 #include "surf.h"
 #include "studio/fs.h"
-#include "studio/net.h"
 #include "studio/config.h"
 #include "console.h"
 #include "menu.h"
@@ -316,65 +315,6 @@ static void updateMenuItemCover(Surf* surf, s32 pos, const u8* cover, s32 size)
     }
 }
 
-typedef struct
-{
-    Surf* surf;
-    s32 pos;
-    char cachePath[TICNAME_MAX];
-    char dir[TICNAME_MAX];
-} CoverLoadingData;
-
-static void coverLoaded(const net_get_data* netData)
-{
-    CoverLoadingData* coverLoadingData = netData->calldata;
-    Surf* surf = coverLoadingData->surf;
-
-    if (netData->type == net_get_done)
-    {
-        tic_fs_saveroot(surf->fs, coverLoadingData->cachePath, netData->done.data, netData->done.size, false);
-
-        char dir[TICNAME_MAX];
-        tic_fs_dir(surf->fs, dir);
-
-        if(strcmp(dir, coverLoadingData->dir) == 0)
-            updateMenuItemCover(surf, coverLoadingData->pos, netData->done.data, netData->done.size);
-    }
-
-    switch (netData->type)
-    {
-    case net_get_done:
-    case net_get_error:
-        free(coverLoadingData);
-        break;
-    default: break;
-    }
-}
-
-static void requestCover(Surf* surf, SurfItem* item)
-{
-    CoverLoadingData coverLoadingData = {surf, surf->menu.pos};
-    tic_fs_dir(surf->fs, coverLoadingData.dir);
-
-    const char* hash = item->hash;
-    sprintf(coverLoadingData.cachePath, TIC_CACHE "%s.gif", hash);
-
-    {
-        s32 size = 0;
-        void* data = tic_fs_loadroot(surf->fs, coverLoadingData.cachePath, &size);
-
-        if (data)
-        {
-            updateMenuItemCover(surf, surf->menu.pos, data, size);
-            free(data);
-        }
-    }
-
-    char path[TICNAME_MAX];
-    sprintf(path, "/cart/%s/cover.gif", hash);
-
-    tic_net_get(surf->net, path, coverLoaded, MOVE(coverLoadingData));
-}
-
 static void loadCover(Surf* surf)
 {
     tic_mem* tic = surf->tic;
@@ -386,53 +326,45 @@ static void loadCover(Surf* surf)
 
     item->coverLoading = true;
 
-    if(!tic_fs_ispubdir(surf->fs))
-    {
+	s32 size = 0;
+	void* data = tic_fs_load(surf->fs, item->name, &size);
 
-        s32 size = 0;
-        void* data = tic_fs_load(surf->fs, item->name, &size);
+	if(data)
+	{
+		tic_cartridge* cart = (tic_cartridge*)malloc(sizeof(tic_cartridge));
 
-        if(data)
-        {
-            tic_cartridge* cart = (tic_cartridge*)malloc(sizeof(tic_cartridge));
+		if(cart)
+		{
 
-            if(cart)
-            {
+			if(tic_tool_has_ext(item->name, PngExt))
+			{
+				tic_cartridge* pngcart = loadPngCart((png_buffer){data, size});
 
-                if(tic_tool_has_ext(item->name, PngExt))
-                {
-                    tic_cartridge* pngcart = loadPngCart((png_buffer){data, size});
-
-                    if(pngcart)
-                    {
-                        memcpy(cart, pngcart, sizeof(tic_cartridge));
-                        free(pngcart);
-                    }
-                    else memset(cart, 0, sizeof(tic_cartridge));
-                }
+				if(pngcart)
+				{
+					memcpy(cart, pngcart, sizeof(tic_cartridge));
+					free(pngcart);
+				}
+				else memset(cart, 0, sizeof(tic_cartridge));
+			}
 #if defined(TIC80_PRO)
-                else if(tic_project_ext(item->name))
-                    tic_project_load(item->name, data, size, cart);
+			else if(tic_project_ext(item->name))
+				tic_project_load(item->name, data, size, cart);
 #endif
-                else
-                    tic_cart_load(cart, data, size);
+			else
+				tic_cart_load(cart, data, size);
 
-                if(!EMPTY(cart->bank0.screen.data) && !EMPTY(cart->bank0.palette.vbank0.data))
-                {
-                    memcpy((item->palette = malloc(sizeof(tic_palette))), &cart->bank0.palette.vbank0, sizeof(tic_palette));
-                    memcpy((item->cover = malloc(sizeof(tic_screen))), &cart->bank0.screen, sizeof(tic_screen));
-                }
+			if(!EMPTY(cart->bank0.screen.data) && !EMPTY(cart->bank0.palette.vbank0.data))
+			{
+				memcpy((item->palette = malloc(sizeof(tic_palette))), &cart->bank0.palette.vbank0, sizeof(tic_palette));
+				memcpy((item->cover = malloc(sizeof(tic_screen))), &cart->bank0.screen, sizeof(tic_screen));
+			}
 
-                free(cart);
-            }
+			free(cart);
+		}
 
-            free(data);
-        }
-    }
-    else if(item->hash && !item->cover)
-    {
-        requestCover(surf, item);    
-    }
+		free(data);
+	}
 }
 
 static void initItemsAsync(Surf* surf, fs_done_callback callback, void* calldata)
@@ -851,7 +783,6 @@ void initSurf(Surf* surf, Studio* studio, struct Console* console)
         .console = console,
         .config = console->config,
         .fs = console->fs,
-        .net = console->net,
         .tick = tick,
         .ticks = 0,
         .init = false,
