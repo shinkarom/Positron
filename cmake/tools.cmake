@@ -74,10 +74,6 @@ if(BUILD_DEMO_CARTS)
         list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/wrendemo.wren)
     endif()
 
-    if(BUILD_WITH_MRUBY)
-        list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/rubydemo.rb)
-    endif()
-
     if(BUILD_WITH_JANET)
         list(APPEND DEMO_CARTS ${DEMO_CARTS_IN}/janetdemo.janet)
     endif()
@@ -125,9 +121,5 @@ if(BUILD_DEMO_CARTS)
         endforeach(CART_FILE)
 
     endif()
-
-    add_custom_command(OUTPUT ${CMAKE_SOURCE_DIR}/build/assets/cart.png.dat
-        COMMAND ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/bin2txt ${CMAKE_SOURCE_DIR}/build/cart.png ${CMAKE_SOURCE_DIR}/build/assets/cart.png.dat
-        DEPENDS bin2txt ${CMAKE_SOURCE_DIR}/build/cart.png)
 
 endif()
