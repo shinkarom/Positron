@@ -796,7 +796,7 @@ static void drawWaves(Sfx* sfx, s32 x, s32 y)
         const tic_sfx_pos* pos = &tic->ram->sfxpos[DEFAULT_CHANNEL];
         bool active = *pos->data < 0 ? sfx->hoverWave == i : i == effect->data[*pos->data].wave;
 
-        drawPanelBorder(tic, rect.x, rect.y, rect.w, rect.h, active ? tic_color_orange : sel ? tic_color_light_green : tic_color_black);
+        drawPanelBorder(tic, rect.x, rect.y, rect.w, rect.h, active ? tic_color_orange : sel ? tic_color_green : tic_color_black);
 
         // draw tiny wave previews
         {
@@ -849,7 +849,7 @@ static void drawWavePanel(Sfx* sfx, s32 x, s32 y)
         tic_sample* effect = getEffect(sfx);
         tic_waveform* wave = getWaveformById(sfx, effect->data[0].wave);
 
-        drawPanelBorder(tic, rect.x - 1, rect.y - 1, rect.w + 2, rect.h + 2, tic_color_light_green);
+        drawPanelBorder(tic, rect.x - 1, rect.y - 1, rect.w + 2, rect.h + 2, tic_color_green);
 
         if(sfx->play.active)
         {
@@ -1097,7 +1097,7 @@ draw:
                 bool empty = memcmp(sfx->src->samples.data + i, EmptyEffect, sizeof EmptyEffect) == 0;
 
                 tic_api_rect(tic, x + c * SizeGap + g * (GroupWidth + GroupGap), y + r * SizeGap, Size, Size, 
-                    sfx->index == i ? tic_color_light_green : hover == i ? tic_color_grey : empty ? tic_color_dark_grey : tic_color_light_grey);
+                    sfx->index == i ? tic_color_green : hover == i ? tic_color_grey : empty ? tic_color_dark_grey : tic_color_light_grey);
             }
 }
 
