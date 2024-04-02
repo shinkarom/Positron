@@ -105,7 +105,6 @@ include(cmake/blipbuf.cmake)
 
 include(cmake/lua.cmake)
 include(cmake/wren.cmake)
-include(cmake/mruby.cmake)
 include(cmake/wasm.cmake)
 include(cmake/scheme.cmake)
 include(cmake/squirrel.cmake)

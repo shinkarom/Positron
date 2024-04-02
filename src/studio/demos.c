@@ -61,22 +61,6 @@ tic_script_config_extra JsSyntaxConfigExtra =
 
 #endif
 
-#if defined(TIC_BUILD_WITH_MRUBY)
-
-static const u8 RubyDemoRom[] =
-{
-    #include "../build/assets/rubydemo.posi.dat"
-};
-
-tic_script_config_extra MRubySyntaxConfigExtra =
-{
-    .name               = "ruby",
-    .demoRom            = RubyDemoRom,
-    .demoRomSize        = sizeof RubyDemoRom,
-};
-
-#endif
-
 #if defined(TIC_BUILD_WITH_WREN)
 
 static const u8 WrenDemoRom[] =
@@ -207,9 +191,6 @@ tic_script_config_extra* LanguagesExtra[] = {
 #endif
 #if defined(TIC_BUILD_WITH_JS)
    &JsSyntaxConfigExtra,
-#endif
-#if defined(TIC_BUILD_WITH_MRUBY)
-   &MRubySyntaxConfigExtra,
 #endif
 #if defined(TIC_BUILD_WITH_WASM)
    &WasmSyntaxConfigExtra,
