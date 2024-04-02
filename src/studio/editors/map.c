@@ -1057,7 +1057,7 @@ static void drawGrid(Map* map)
             for(s32 i = 0; i < TIC80_WIDTH; i++)
             {               
                 u8 color = tic_api_pix(tic, i, j, 0, true);
-                tic_api_pix(tic, i, j, (color+1)%TIC_PALETTE_SIZE, false);
+                tic_api_pix(tic, i, j, (color+8)%TIC_PALETTE_SIZE, false);
             }
     }
 
@@ -1069,7 +1069,7 @@ static void drawGrid(Map* map)
                 if((i+scrollY) % TIC_SPRITESIZE)
                 {
                     u8 color = tic_api_pix(tic, j, i, 0, true);
-                    tic_api_pix(tic, j, i, (color+1)%TIC_PALETTE_SIZE, false);
+                    tic_api_pix(tic, j, i, (color+8)%TIC_PALETTE_SIZE, false);
                 }
             }
     }

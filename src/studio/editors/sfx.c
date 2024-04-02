@@ -165,7 +165,7 @@ static void drawCanvasLeds(Sfx* sfx, s32 x, s32 y, s32 canvasTab)
 
         case SFX_CHORD_PANEL:
             for(s32 j = 1, start = Height - LedHeight, value = effect->data[i].chord + 1; j <= value; j++, start -= LedHeight)
-                tic_api_rect(tic, x + i * LedWidth + Gap, y + start, LedWidth-Gap, LedHeight-Gap, j == value ? tic_color_green : tic_color_light_green);
+                tic_api_rect(tic, x + i * LedWidth + Gap, y + start, LedWidth-Gap, LedHeight-Gap, j == value ? tic_color_green : tic_color_dark_brown);
             break;
 
         case SFX_PITCH_PANEL:
@@ -213,7 +213,7 @@ static void drawVolumeStereo(Sfx* sfx, s32 x, s32 y)
                 effect->stereo_left = ~effect->stereo_left;
         }
 
-        tic_api_print(tic, "L", rect.x, rect.y, effect->stereo_left ? hover ? tic_color_grey : tic_color_dark_grey : tic_color_light_green, true, 1, true);
+        tic_api_print(tic, "L", rect.x, rect.y, effect->stereo_left ? hover ? tic_color_grey : tic_color_dark_grey : tic_color_dark_brown, true, 1, true);
     }
 
     {
@@ -231,7 +231,7 @@ static void drawVolumeStereo(Sfx* sfx, s32 x, s32 y)
                 effect->stereo_right = ~effect->stereo_right;
         }
 
-        tic_api_print(tic, "R", rect.x, rect.y, effect->stereo_right ? hover ? tic_color_grey : tic_color_dark_grey : tic_color_light_green, true, 1, true);
+        tic_api_print(tic, "R", rect.x, rect.y, effect->stereo_right ? hover ? tic_color_grey : tic_color_dark_grey : tic_color_dark_brown, true, 1, true);
     }
 }
 
@@ -260,7 +260,7 @@ static void drawArppeggioSwitch(Sfx* sfx, s32 x, s32 y)
                 effect->reverse = ~effect->reverse;
         }
 
-        tic_api_print(tic, Label, rect.x, rect.y, effect->reverse ? tic_color_light_green : hover ? tic_color_grey : tic_color_dark_grey, true, 1, true);
+        tic_api_print(tic, Label, rect.x, rect.y, effect->reverse ? tic_color_dark_brown : hover ? tic_color_grey : tic_color_dark_grey, true, 1, true);
     }
 }
 
@@ -289,7 +289,7 @@ static void drawPitchSwitch(Sfx* sfx, s32 x, s32 y)
                 effect->pitch16x = ~effect->pitch16x;
         }
 
-        tic_api_print(tic, Label, rect.x, rect.y, effect->pitch16x ? tic_color_light_green : hover ? tic_color_grey : tic_color_dark_grey, true, 1, true);
+        tic_api_print(tic, Label, rect.x, rect.y, effect->pitch16x ? tic_color_dark_brown : hover ? tic_color_grey : tic_color_dark_grey, true, 1, true);
     }
 }
 
@@ -324,7 +324,7 @@ static void drawVolWaveSelector(Sfx* sfx, s32 x, s32 y)
                 sfx->volwave = item->panel;
         }
 
-        tic_api_print(tic, item->label, x + item->rect.x, y + item->rect.y, item->panel == sfx->volwave ? tic_color_light_green : hover ? tic_color_grey : tic_color_dark_grey, true, 1, true);
+        tic_api_print(tic, item->label, x + item->rect.x, y + item->rect.y, item->panel == sfx->volwave ? tic_color_dark_brown : hover ? tic_color_grey : tic_color_dark_grey, true, 1, true);
     }
 }
 
@@ -1049,7 +1049,7 @@ static void drawSpeedPanel(Sfx* sfx, s32 x, s32 y)
     tic_api_print(tic, "SPD", x, y, tic_color_dark_grey, true, 1, true);
 
     for(s32 i = 0; i < Count; i++)
-        tic_api_rect(tic, rect.x + i * ColWidthGap, rect.y, ColWidth, rect.h, i - MaxSpeed <= effect->speed ? tic_color_light_green : hover == i ? tic_color_grey : tic_color_dark_grey);
+        tic_api_rect(tic, rect.x + i * ColWidthGap, rect.y, ColWidth, rect.h, i - MaxSpeed <= effect->speed ? tic_color_dark_brown : hover == i ? tic_color_grey : tic_color_dark_grey);
 }
 
 static void drawSelectorPanel(Sfx* sfx, s32 x, s32 y)
@@ -1112,7 +1112,7 @@ static void drawSelector(Sfx* sfx, s32 x, s32 y)
     {
         char buf[] = "00";
         sprintf(buf, "%02i", sfx->index);
-        tic_api_print(tic, buf, x + 20, y + 2, tic_color_light_green, true, 1, true);
+        tic_api_print(tic, buf, x + 20, y + 2, tic_color_dark_brown, true, 1, true);
         tic_api_print(tic, "IDX", x + 6, y + 2, tic_color_dark_grey, true, 1, true);
     }
 

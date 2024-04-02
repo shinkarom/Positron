@@ -1811,7 +1811,7 @@ static void drawTrackerChannel(Music* music, s32 x, s32 y, s32 channel)
             if(row->command > tic_music_cmd_empty)
                 sprintf(rowStr+5, "%c%01X%01X", MusicCommands[row->command], row->param1, row->param2);
 
-            static const u8 Colors[] = { tic_color_light_green, tic_color_yellow, tic_color_light_blue };
+            static const u8 Colors[] = { tic_color_dark_brown, tic_color_yellow, tic_color_light_blue };
             static const u8 DarkColors[] = { tic_color_green, tic_color_orange, tic_color_blue };
             static u8 ColorIndexes[] = { 0, 0, 0, 1, 1, 2, 2, 2 };
 
@@ -2197,7 +2197,7 @@ static void drawStereoSeparator(Music* music, s32 x, s32 y)
     tic_mem* tic = music->tic;
     static u8 Colors[] = 
     {
-        tic_color_dark_green, tic_color_green, tic_color_light_green, tic_color_light_green
+        tic_color_dark_green, tic_color_green, tic_color_dark_brown, tic_color_dark_brown
     };
 
     for(s32 i = 0; i < COUNT_OF(Colors); i++)
@@ -2420,7 +2420,7 @@ static void drawPianoNoteColumn(Music* music, s32 x, s32 y)
             }
 
             if (row->note >= NoteStart)
-                tic_api_rect(tic, x + (row->note - NoteStart) * NoteWidth, y + Header + r * NoteHeight, NoteWidth - 1, NoteHeight - 1, tic_color_light_green);
+                tic_api_rect(tic, x + (row->note - NoteStart) * NoteWidth, y + Header + r * NoteHeight, NoteWidth - 1, NoteHeight - 1, tic_color_dark_brown);
         }
     }
     else
@@ -2901,7 +2901,7 @@ static void drawWaveform(Music* music, s32 x, s32 y)
             ramp /= WAVE_MAX_VALUE * WAVE_MAX_VALUE;
 
             tic_api_rect(tic, x + i, y + (Height-1) - ramp * Height / WaveRows, 1, 1, tic_color_yellow);
-            tic_api_rect(tic, x + i, y + (Height-1) - lamp * Height / WaveRows, 1, 1, tic_color_light_green);
+            tic_api_rect(tic, x + i, y + (Height-1) - lamp * Height / WaveRows, 1, 1, tic_color_dark_brown);
         }
     }
 }
