@@ -27,9 +27,7 @@ set(TIC80STUDIO_SRC
     ${TIC80LIB_DIR}/ext/png.c
 )
 
-if(${BUILD_PRO})
     set(TIC80STUDIO_SRC ${TIC80STUDIO_SRC} ${TIC80LIB_DIR}/studio/project.c)
-endif()
 
 set(TIC80_OUTPUT tic80)
 
@@ -51,9 +49,7 @@ if(USE_NAETT)
     target_link_libraries(tic80studio naett)
 endif()
 
-if(BUILD_PRO)
     target_compile_definitions(tic80studio PRIVATE TIC80_PRO)
-endif()
 
 if(BUILD_SDLGPU)
     target_compile_definitions(tic80studio PUBLIC CRT_SHADER_SUPPORT)

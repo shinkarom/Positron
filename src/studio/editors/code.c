@@ -34,11 +34,7 @@
 #define TEXT_BUFFER_HEIGHT (CODE_EDITOR_HEIGHT / STUDIO_TEXT_HEIGHT)
 #define SIDEBAR_WIDTH (12 * TIC_FONT_WIDTH)
 
-#if defined(TIC80_PRO)
 #   define MAX_CODE sizeof(tic_code)
-#else
-#   define MAX_CODE TIC_BANK_SIZE
-#endif
 
 #define noop (void)0
 

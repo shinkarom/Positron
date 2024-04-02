@@ -60,11 +60,7 @@
 
 #define MD5_HASHSIZE 16
 
-#if defined(TIC80_PRO)
 #define TIC_EDITOR_BANKS (TIC_BANKS)
-#else
-#define TIC_EDITOR_BANKS 1
-#endif
 
 #ifdef BUILD_EDITORS
 typedef struct
@@ -335,7 +331,6 @@ const char* studioExportMusic(Studio* studio, s32 track, s32 bank, const char* f
 #if TIC80_SAMPLE_CHANNELS == 2
         wave_enable_stereo();
 #endif
-#if defined(TIC80_PRO)
         // chained = true in CLI. Set to false if want to use unchained
         bool chained = studio->bank.chained;
         if(chained)
@@ -344,7 +339,6 @@ const char* studioExportMusic(Studio* studio, s32 track, s32 bank, const char* f
             for(s32 i = 0; i < COUNT_OF(BankModes); i++)
                 if(BankModes[i] == TIC_MUSIC_MODE)
                     studio->bank.indexes[i] = bank;
-#endif
         const tic_sfx* sfx = getSfxSrc(studio);
         const tic_music* music = getMusicSrc(studio);
 
@@ -689,8 +683,6 @@ struct Start* getStartScreen(Studio* studio)
     return studio->start;
 }
 
-#if defined (TIC80_PRO)
-
 static void drawBankIcon(Studio* studio, s32 x, s32 y)
 {
     tic_mem* tic = studio->tic;
@@ -784,8 +776,6 @@ static void drawBankIcon(Studio* studio, s32 x, s32 y)
         drawBitIcon(studio, tic_icon_bank, x, y, over ? tic_color_red : tic_color_light_grey);
     }
 }
-
-#endif
 
 static inline s32 lerp(s32 a, s32 b, float d)
 {
@@ -1053,13 +1043,9 @@ void drawToolbar(Studio* studio, tic_mem* tic, bool bg)
         "MUSIC EDITOR",
     };
 
-#if defined (TIC80_PRO)
     enum {TextOffset = (COUNT_OF(Modes) + 2) * Size - 2};
     if(mode >= 1)
         drawBankIcon(studio, COUNT_OF(Modes) * Size + 2, 0);
-#else
-    enum {TextOffset = (COUNT_OF(Modes) + 1) * Size};
-#endif
 
     if(mode == 0 || (mode >= 1 && !studio->bank.show))
     {
@@ -1700,8 +1686,6 @@ static void switchCrtMonitor(Studio* studio)
 }
 #endif
 
-#if defined(TIC80_PRO)
-
 static void switchBank(Studio* studio, s32 bank)
 {
     for(s32 i = 0; i < COUNT_OF(BankModes); i++)
@@ -1713,8 +1697,6 @@ static void switchBank(Studio* studio, s32 bank)
             break;
         }
 }
-
-#endif
 
 void gotoMenu(Studio* studio) 
 {
@@ -1774,14 +1756,10 @@ static void processShortcuts(Studio* studio)
         else if(keyWasPressedOnce(studio, tic_key_s)) saveProject(studio);
 #endif
 
-#if defined(TIC80_PRO)
-
         else
             for(s32 bank = 0; bank < TIC_BANKS; bank++)
                 if(keyWasPressedOnce(studio, tic_key_0 + bank))
                     switchBank(studio, bank);
-
-#endif
 
     }
     else

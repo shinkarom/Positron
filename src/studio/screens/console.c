@@ -31,11 +31,7 @@
 #include "studio/demos.h"
 #include "retro_endianness.h"
 
-#if defined(TIC80_PRO)
 #include "studio/project.h"
-#else
-#include "cart.h"
-#endif
 
 #include <ctype.h>
 #include <string.h>
@@ -114,11 +110,7 @@
     macro(screen)               \
     macro(help)
 
-#if defined(TIC80_PRO)
 #   define ALONE_KEY(macro) macro(alone)
-#else
-#   define ALONE_KEY(macro)
-#endif
 
 #define EXPORT_KEYS_LIST(macro) \
     macro(bank)                 \
@@ -742,11 +734,9 @@ static void updateProject(Console* console)
 
         if(data) SCOPE(free(data))
         {
-#if defined(TIC80_PRO)
             if(tic_project_ext(path))
                 tic_project_load(console->rom.name, data, size, &tic->cart);
             else
-#endif
                 tic_cart_load(&tic->cart, data, size);
 
             studioRomLoaded(console->studio);
@@ -925,7 +915,6 @@ static void onLoadCommandConfirmed(Console* console)
             {
                 const char* name = param;
 
-#if defined(TIC80_PRO)
                 if(tic_project_ext(name))
                 {
                     void* data = tic_fs_load(console->fs, name, &size);
@@ -945,22 +934,6 @@ static void onLoadCommandConfirmed(Console* console)
 
                 }
                 else printError(console, "\nfile not found");
-#else
-                if(tic_project_ext(name)) {
-                    printError(console, "\nproject loading error");
-                    printFront(console, "\nThis version only supports binary .png or .tic cartridges.");
-                    printLine(console);
-                    printFront(console, "\nTIC-80 ");
-                    consolePrint(console,"PRO",tic_color_light_blue);
-                    printFront(console, " is needed for text files.");
-                    printLine(console);
-                    printFront(console, "\nLearn more:\n");
-                    printLink(console, "https://tic80.com/pro");
-                } else {
-                    printError(console, "\ncart loading error");
-                }
-
-#endif
             }
         }
     }
@@ -2221,12 +2194,10 @@ static CartSaveResult saveCartName(Console* console, const char* name)
                     buffer = result.data;
                     size = result.size;
                 }
-#if defined(TIC80_PRO)
                 else if(tic_project_ext(name))
                 {
                     size = tic_project_save(name, buffer, &tic->cart);
                 }
-#endif
                 else
                 {
                     name = getCartName(name);
@@ -3989,13 +3960,11 @@ static bool cmdLoadCart(Console* console, const char* path)
             tic_cart_load(&tic->cart, data, size);
             done = true;
         }
-#if defined(TIC80_PRO)
         else if(tic_project_ext(cartName))
         {
             if(tic_project_load(cartName, data, size, &tic->cart))
                 done = true;
         }
-#endif
 
         free(data);
     }
