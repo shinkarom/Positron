@@ -124,7 +124,7 @@ static inline bool isIdle(Map* map)
 
 static inline bool sheetVisible(Map* map)
 {
-    return map->anim.pos.sheet >= 0;
+    return map->sheet.visible;
 }
 
 static s32 drawSheetButton(Map* map, s32 x, s32 y)
@@ -143,7 +143,8 @@ static s32 drawSheetButton(Map* map, s32 x, s32 y)
 
         if(isIdle(map) && checkMouseClick(map->studio, &rect, tic_mouse_left))
         {
-            map->anim.movie = resetMovie(sheetVisible(map) ? &map->anim.hide : &map->anim.show);
+			map->sheet.visible = !map->sheet.visible;
+            //map->anim.movie = resetMovie(sheetVisible(map) ? &map->anim.hide : &map->anim.show);
             map->sheet.keep = true;
         }
     }
@@ -401,7 +402,7 @@ static void drawSheetVBank1(Map* map, s32 x, s32 y)
 
     tic_rect rect = {x, y, TIC_SPRITESHEET_SIZE, TIC_SPRITESHEET_SIZE};
 
-    tic_api_rectb(map->tic, rect.x - 1, rect.y - 1 + map->anim.pos.sheet, rect.w + 2, rect.h + 2, tic_color_white);
+    tic_api_rectb(map->tic, rect.x - 1, rect.y - 1, rect.w + 2, rect.h + 2, tic_color_white);
 
     for(s32 i = 1; i < rect.h; i += 4)
     {
@@ -424,7 +425,7 @@ static void drawSheetVBank1(Map* map, s32 x, s32 y)
         s32 bw = map->sheet.rect.w * TIC_SPRITESIZE + 2;
         s32 bh = map->sheet.rect.h * TIC_SPRITESIZE + 2;
 
-        tic_api_rectb(map->tic, bx, by + map->anim.pos.sheet, bw, bh, tic_color_white);
+        tic_api_rectb(map->tic, bx, by, bw, bh, tic_color_white);
     }
 }
 
@@ -478,13 +479,14 @@ static void drawSheetReg(Map* map, s32 x, s32 y)
         else
         {
             if(map->sheet.keep && map->sheet.drag)
-                map->anim.movie = resetMovie(&map->anim.hide);
+				map->sheet.visible = false;
+                //map->anim.movie = resetMovie(&map->anim.hide);
             
             map->sheet.drag = false;
         }
     }
 
-    tic_api_clip(tic, x, y + map->anim.pos.sheet, TIC_SPRITESHEET_SIZE, TIC_SPRITESHEET_SIZE);
+    tic_api_clip(tic, x, y, TIC_SPRITESHEET_SIZE, TIC_SPRITESHEET_SIZE);
 
     tiles2ram(tic->ram, getBankTiles(map->studio));
 
@@ -493,18 +495,18 @@ static void drawSheetReg(Map* map, s32 x, s32 y)
     {
         tic_point start = 
         {
-            x - blit.page * TIC_SPRITESHEET_SIZE + map->anim.pos.page,
-            y - blit.bank * TIC_SPRITESHEET_SIZE + map->anim.pos.bank
+            x,
+            y
         }, pos = start;
 
-        for(blit.bank = 0; blit.bank < TIC_SPRITE_BANKS; ++blit.bank, pos.y += TIC_SPRITESHEET_SIZE, pos.x = start.x)
-        {
-            for(blit.page = 0; blit.page < blit.pages; ++blit.page, pos.x += TIC_SPRITESHEET_SIZE)
-            {
+      //  for(blit.bank = 0; blit.bank < TIC_SPRITE_BANKS; ++blit.bank, pos.y += TIC_SPRITESHEET_SIZE, pos.x = start.x)
+      //  {
+      //      for(blit.page = 0; blit.page < blit.pages; ++blit.page, pos.x += TIC_SPRITESHEET_SIZE)
+      //      {
                 tic->ram->vram.blit.segment = tic_blit_calc_segment(&blit);
-                tic_api_spr(tic, 0, pos.x, pos.y + map->anim.pos.sheet, TIC_SPRITESHEET_COLS, TIC_SPRITESHEET_COLS, NULL, 0, 1, tic_no_flip, tic_no_rotate);
-            }
-        }
+                tic_api_spr(tic, 0, x, y, TIC_SPRITESHEET_COLS, TIC_SPRITESHEET_COLS, NULL, 0, 1, tic_no_flip, tic_no_rotate);
+      //      }
+      //  }
     }
 }
 
@@ -1224,14 +1226,16 @@ static void processKeyboard(Map* map)
         {
             if(!sheetVisible(map))
             {
-                map->anim.movie = resetMovie(&map->anim.show);
+				map->sheet.visible = true;
+                //map->anim.movie = resetMovie(&map->anim.show);
                 map->sheet.keep = false;
             }
         }
         else
         {
             if(!map->sheet.keep && sheetVisible(map))
-                map->anim.movie = resetMovie(&map->anim.hide);
+				map->sheet.visible = false;
+                //map->anim.movie = resetMovie(&map->anim.hide);
         }
     }
 
@@ -1300,7 +1304,9 @@ static void tick(Map* map)
     processKeyboard(map);
 
     drawMapReg(map);
-    drawSheetReg(map, TIC80_WIDTH - TIC_SPRITESHEET_SIZE - 1, TOOLBAR_SIZE);
+	if(map->sheet.visible){
+		drawSheetReg(map, TIC80_WIDTH - TIC_SPRITESHEET_SIZE - 1, TOOLBAR_SIZE);
+	}
 
     VBANK(tic, 1)
     {
@@ -1318,7 +1324,9 @@ static void tick(Map* map)
         }
         tic_api_clip(tic, 0, 0, TIC80_WIDTH, TIC80_HEIGHT);
 
-        drawSheetVBank1(map, TIC80_WIDTH - TIC_SPRITESHEET_SIZE - 1, TOOLBAR_SIZE);
+		if(map->sheet.visible) {
+			drawSheetVBank1(map, TIC80_WIDTH - TIC_SPRITESHEET_SIZE - 1, TOOLBAR_SIZE);
+		}
 
         {
             tic_rect rect = {MAP_X, MAP_Y, MAP_WIDTH, MAP_HEIGHT};

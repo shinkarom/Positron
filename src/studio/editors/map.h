@@ -53,6 +53,7 @@ struct Map
 
     struct
     {
+		bool visible;
         bool keep;
         tic_rect rect;
         tic_point start;
