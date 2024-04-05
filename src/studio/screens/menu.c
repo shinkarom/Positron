@@ -141,7 +141,7 @@ static void drawTopBar(Menu* menu, s32 x, s32 y)
 {
     tic_mem* tic = menu->tic;
 
-    y += menu->anim.top;
+    //y += menu->anim.top;
 
     tic_api_rect(tic, x, y, TIC80_WIDTH, ItemHeight, tic_color_grey);
     tic_api_rect(tic, x, y + ItemHeight, TIC80_WIDTH, 1, tic_color_black);
@@ -154,7 +154,7 @@ static void drawBottomBar(Menu* menu, s32 x, s32 y)
 {
     tic_mem* tic = menu->tic;
 
-    y += menu->anim.bottom;
+    //y += menu->anim.bottom;
 
     tic_api_rect(tic, x, y, TIC80_WIDTH, ItemHeight, tic_color_grey);
     tic_api_rect(tic, x, y - 1, TIC80_WIDTH, 1, tic_color_black);
@@ -282,8 +282,8 @@ static void drawMenu(Menu* menu, s32 x, s32 y)
     {
         s32 width = it->option ? menu->maxwidth.item + menu->maxwidth.option + 3 * TIC_FONT_WIDTH : it->width;
 
-        tic_rect rect = {x + (TIC80_WIDTH - width) / 2 + menu->anim.offset, 
-            y + TextMargin + ItemHeight * (i - menu->pos) - menu->anim.pos, it->width, TIC_FONT_HEIGHT};
+        tic_rect rect = {x + (TIC80_WIDTH - width) / 2 , 
+            y + TextMargin + ItemHeight * (i - menu->pos), it->width, TIC_FONT_HEIGHT};
 
         if (it->hotkey != tic_key_unknown && tic_api_keyp(tic, it->hotkey, Hold, Period))
         {
@@ -368,7 +368,7 @@ static void drawCursor(Menu* menu, s32 x, s32 y)
 {
     tic_mem* tic = menu->tic;
 
-    tic_api_rect(tic, x, y - (menu->anim.cursor - ItemHeight) / 2, TIC80_WIDTH, menu->anim.cursor, tic_color_red);
+    tic_api_rect(tic, x, y, TIC80_WIDTH, ItemHeight, tic_color_dark_brown);
 }
 
 Menu* studio_menu_create(Studio* studio)
@@ -446,7 +446,8 @@ void studio_menu_tick(Menu* menu)
     if(getStudioMode(menu->studio) != TIC_MENU_MODE)
         return;
 
-    studio_menu_anim(tic, menu->ticks);
+	tic_api_cls(tic, TIC_COLOR_BG);
+    //studio_menu_anim(tic, menu->ticks);
 
     VBANK(tic, 1)
     {
