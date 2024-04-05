@@ -3143,7 +3143,7 @@ static void textEditTick(Code* code)
 
 static void drawPopupBar(Code* code, const char* title)
 {
-    s32 pos = code->anim.pos;
+    s32 pos = 0;
 
     enum {TextX = BOOKMARK_WIDTH};
 
@@ -3478,7 +3478,7 @@ static void textBookmarkTick(Code* code)
 
     drawCode(code, false);
     drawStatus(code);
-    drawSidebarBar(code, (TIC80_WIDTH - SIDEBAR_WIDTH) + code->anim.sidebar, TIC_FONT_HEIGHT+1);
+    drawSidebarBar(code, (TIC80_WIDTH - SIDEBAR_WIDTH), TIC_FONT_HEIGHT+1);
 }
 
 static void textOutlineTick(Code* code)
@@ -3510,7 +3510,7 @@ static void textOutlineTick(Code* code)
 
     drawCode(code, false);
     drawStatus(code);
-    drawSidebarBar(code, (TIC80_WIDTH - SIDEBAR_WIDTH) + code->anim.sidebar, 2*(TIC_FONT_HEIGHT+1));
+    drawSidebarBar(code, (TIC80_WIDTH - SIDEBAR_WIDTH), 2*(TIC_FONT_HEIGHT+1));
     drawPopupBar(code, "FUNC:");
 }
 
