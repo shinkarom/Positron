@@ -152,7 +152,6 @@ static void readConfig(Config* config)
     {
         if(luaL_loadstring(lua, config->cart->code.data) == LUA_OK && lua_pcall(lua, 0, LUA_MULTRET, 0) == LUA_OK)
         {
-            readGlobalBool(lua,     "CHECK_NEW_VERSION",    &config->data.checkNewVersion);
             readGlobalInteger(lua,  "UI_SCALE",             &config->data.uiScale);
             readGlobalBool(lua,     "SOFTWARE_RENDERING",   &config->data.soft);
             readGlobalBool(lua,     "TRIM_ON_SAVE",         &config->data.trim);
@@ -195,7 +194,6 @@ static void setDefault(Config* config)
             .vsync          = DEFAULT_VSYNC,
             .fullscreen     = false,
             .integerScale   = INTEGER_SCALE_DEFAULT,
-            .autosave       = false,
 #if defined(BUILD_EDITORS)
             .keybindMode    = KEYBIND_STANDARD,
             .devmode        = false,

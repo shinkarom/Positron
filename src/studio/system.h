@@ -110,7 +110,6 @@ typedef struct
 
     } theme;
 
-    bool checkNewVersion;
     bool cli;
     bool soft;
     bool trim;
@@ -125,7 +124,6 @@ typedef struct
         bool vsync;
         bool integerScale;
         s32 volume;
-        bool autosave;
         tic_mapping mapping;
 #if defined(BUILD_EDITORS)
         enum KeybindMode keybindMode;

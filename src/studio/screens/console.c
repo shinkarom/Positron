@@ -3324,100 +3324,6 @@ static void setScroll(Console* console, s32 val)
     }
 }
 
-#if defined (TIC_BUILD_WITH_LUA)
-
-static lua_State* netLuaInit(u8* buffer, s32 size)
-{
-    if (buffer && size)
-    {
-        char* script = calloc(1, size + 1);
-        memcpy(script, buffer, size);
-        lua_State* lua = luaL_newstate();
-
-        if(lua)
-        {
-            if(luaL_loadstring(lua, (char*)script) == LUA_OK && lua_pcall(lua, 0, LUA_MULTRET, 0) == LUA_OK)
-	    {
-                free(script);
-                return lua;
-	    }
-            else lua_close(lua);
-        }
-
-        free(script);
-    }
-
-    return NULL;
-}
-
-static void onHttpVersionGet(const net_get_data* data)
-{
-    Console* console = (Console*)data->calldata;
-
-    switch(data->type)
-    {
-    case net_get_done:
-        {
-            lua_State* lua = netLuaInit(data->done.data, data->done.size);
-
-            union
-            {
-                struct
-                {
-                    s32 major;
-                    s32 minor;
-                    s32 patch;
-                };
-
-                s32 data[3];
-            } version =
-            {
-	      {
-                .major = TIC_VERSION_MAJOR,
-                .minor = TIC_VERSION_MINOR,
-                .patch = TIC_VERSION_REVISION,
-	      },
-            };
-
-            if(lua)
-            {
-                static const char* Fields[] = {"major", "minor", "patch"};
-
-                for(s32 i = 0; i < COUNT_OF(Fields); i++)
-                {
-                    lua_getglobal(lua, Fields[i]);
-
-                    if(lua_isinteger(lua, -1))
-                        version.data[i] = (s32)lua_tointeger(lua, -1);
-
-                    lua_pop(lua, 1);
-                }
-
-                lua_close(lua);
-            }
-
-            if((version.major > TIC_VERSION_MAJOR) ||
-                (version.major == TIC_VERSION_MAJOR && version.minor > TIC_VERSION_MINOR) ||
-                (version.major == TIC_VERSION_MAJOR && version.minor == TIC_VERSION_MINOR && version.patch > TIC_VERSION_REVISION))
-            {
-                char msg[TICNAME_MAX];
-                sprintf(msg, " new version %i.%i.%i available", version.major, version.minor, version.patch);
-
-                enum{Offset = (2 * STUDIO_TEXT_BUFFER_WIDTH)};
-
-                memset(console->text + Offset, ' ', STUDIO_TEXT_BUFFER_WIDTH);
-                strcpy(console->text + Offset, msg);
-                memset(console->color + Offset, tic_color_red, strlen(msg));
-            }
-        }
-        break;
-    default:
-        break;
-    }
-}
-
-#endif
-
 static char* getSelectionText(Console* console)
 {
     const char* start = console->select.start;
@@ -3742,11 +3648,6 @@ static void tick(Console* console)
                 printBack(console, "\n hello! type ");
                 printFront(console, "help");
                 printBack(console, " for help\n");
-
-#if defined (TIC_BUILD_WITH_LUA)
-                if(getConfig(console->studio)->checkNewVersion)
-                    tic_net_get(console->net, "/api?fn=version", onHttpVersionGet, console);
-#endif
             }
 
             commandDone(console);
