@@ -79,7 +79,6 @@
     macro(keys)                 \
     macro(buttons)                 \
     macro(startup)              \
-    macro(terms)                \
     macro(license)
 
 #define IMPORT_CMD_LIST(macro)  \
@@ -119,41 +118,30 @@
     ALONE_KEY(macro)
 
 static const char* WelcomeText =
-    "TIC-80 is a fantasy computer for making, playing and sharing tiny games.\n\n"
+    "Positron is a fantasy computer for making, playing and sharing tiny games.\n\n"
     "It has built-in tools for development: code, sprites, maps, sound editors and the command line, "
     "which is enough to create a mini retro game.\n"
-    "In the end, you will get a cartridge file, which can be stored and played on the website.\n\n"
+    "In the end, you will get a cartridge file.\n\n"
     "Also, the game can be packed into a player that works on all popular platforms and distributed as you wish.\n"
     "To make a retro-style game, the whole creation process takes place under some technical limitations: "
-    "240x136 pixels display, 16 color palette, 256 8x8 color sprites, 4 channel sound, etc.";
+    "240x176 pixels display, 16 color palette, 256 8x8 color sprites, 4 channel sound, etc.";
 
 static const struct SpecRow {const char* section; const char* info;} SpecText1[] =
 {
-    {"DISPLAY", "240x136 pixels, 16 colors palette."},
+    {"DISPLAY", "240x176 pixels, 16 colors palette."},
     {"INPUT",   "4 gamepads with 8 buttons / mouse / keyboard."},
     {"SPRITES", "256 8x8 tiles and 256 8x8 sprites."},
-    {"MAP",     "240x136 cells, 1920x1088 pixels."},
+    {"MAP",     "240x176 cells, 1920x1408 pixels."},
     {"SOUND",   "4 channels with configurable waveforms."},
     {"CODE",    "64KB of $LANG_NAMES$.",
     },
 };
 
-static const char* TermsText =
-    "## Terms of Use\n"
-    "- All cartridges posted on the " TIC_WEBSITE " website are the property of their authors.\n"
-    "- Do not redistribute the cartridge without permission, directly from the author.\n"
-    "- By uploading cartridges to the site, you grant Nesbox the right to freely use and distribute them. "
-    "All other rights by default remain with the author.\n"
-    "- Do not post material that violates copyright, obscenity or any other laws.\n"
-    "- Nesbox reserves the right to remove or filter any material without prior notice.\n\n"
-    "## Privacy Policy\n"
-    "We store only the user's email and password in encrypted form and will not transfer any personal "
-    "information to third parties without explicit permission.";
-
 static const char* LicenseText =
     "## MIT License\n"
     "\n"
-    "Copyright (c) 2017-" TIC_VERSION_YEAR " Vadim Grigoruk @nesbox // grigoruk@gmail.com\n"
+    "Copyright (c) 2017-" TIC_VERSION_YEAR " Vadim Grigoruk @nesbox // grigoruk@gmail.com (TIC-80)\n"
+	"(c) 2024-" TIC_VERSION_YEAR " Roman \"shinkarom\" Shynkarenko (Positron)"
     "\n"
     "Permission is hereby granted, free of charge, to any person obtaining a copy "
     "of this software and associated documentation files (the 'Software'), to deal "
@@ -2870,7 +2858,7 @@ static void onExport_help(Console* console, const char* param, const char* name,
         FOR(const struct StartupOption*, opt, StartupOptions)
             ptr += sprintf(ptr, "--%-14s %s\n", opt->name, opt->help);
 
-        ptr += sprintf(ptr, "```\n\n%s\n\n%s", TermsText, LicenseText);
+        ptr += sprintf(ptr, "```\n\n%s", LicenseText);
 
         char* helpReplaced = replaceHelpTokens(buf);
 
@@ -3143,12 +3131,6 @@ static void onHelp_startup(Console* console)
 #undef  PREFIX
 #undef  OFFSET
     }
-}
-
-static void onHelp_terms(Console* console)
-{
-    printLine(console);
-    printBack(console, TermsText);
 }
 
 static void onHelp_license(Console* console)
