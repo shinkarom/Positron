@@ -133,24 +133,6 @@ static void drawBottomToolbar(Surf* surf, s32 x, s32 y)
         tic_api_print(tic, label, xl, yl, tic_color_white, true, 1, false);
     }
 
-#ifdef CAN_OPEN_URL 
-
-    if(surf->menu.count > 0 && getMenuItem(surf)->hash)
-    {
-        enum{Gap = 10, TipX = 134, SelectWidth = 54};
-
-        u8 colorkey = 0;
-
-        tiles2ram(tic->ram, &getConfig(surf->studio)->cart->bank0.tiles);
-        tic_api_spr(tic, 15, TipX + SelectWidth, y + 1, 1, 1, &colorkey, 1, 1, tic_no_flip, tic_no_rotate);
-        {
-            static const char Label[] = "WEBSITE";
-            tic_api_print(tic, Label, TipX + Gap + SelectWidth, y + 3, tic_color_black, true, 1, false);
-            tic_api_print(tic, Label, TipX + Gap + SelectWidth, y + 2, tic_color_white, true, 1, false);
-        }
-    }
-#endif
-
 }
 
 static void drawMenu(Surf* surf, s32 x, s32 y)
@@ -159,9 +141,9 @@ static void drawMenu(Surf* surf, s32 x, s32 y)
 
     enum {Height = MENU_HEIGHT};
 
-    tic_api_rect(tic, 0, y + (MENU_HEIGHT - surf->anim.val.menuHeight) / 2, TIC80_WIDTH, surf->anim.val.menuHeight, tic_color_red);
+    tic_api_rect(tic, 0, y, TIC80_WIDTH, Height, tic_color_red);
 
-    s32 ym = y - surf->menu.pos * MENU_HEIGHT + (MENU_HEIGHT - TIC_FONT_HEIGHT) / 2 - surf->anim.val.pos;
+    s32 ym = y - surf->menu.pos * MENU_HEIGHT + (MENU_HEIGHT - TIC_FONT_HEIGHT) / 2;
     for(s32 i = 0; i < surf->menu.count; i++, ym += Height)
     {
         const char* name = surf->menu.items[i].label;
@@ -640,8 +622,6 @@ static void tick(Surf* surf)
     tic_mem* tic = surf->tic;
     tic_api_cls(tic, TIC_COLOR_BG);
 
-    studio_menu_anim(surf->tic, surf->ticks++);
-
     if (isIdle(surf))
     {
 		if (surf->menu.count > 0)
@@ -671,7 +651,7 @@ static void tick(Surf* surf)
 
         if(surf->menu.count > 0)
         {
-            drawMenu(surf, surf->anim.val.menuX, (TIC80_HEIGHT - MENU_HEIGHT)/2);
+			drawMenu(surf, 0, (TIC80_HEIGHT - MENU_HEIGHT)/2);
         }
         else if(!surf->loading)
         {
@@ -680,8 +660,8 @@ static void tick(Surf* surf)
             tic_api_print(tic, Label, (TIC80_WIDTH - size) / 2, (TIC80_HEIGHT - TIC_FONT_HEIGHT)/2, tic_color_white, true, 1, false);
         }
 
-        drawTopToolbar(surf, 0, surf->anim.val.topBarY - MENU_HEIGHT);
-        drawBottomToolbar(surf, 0, TIC80_HEIGHT - surf->anim.val.bottomBarY);
+        drawTopToolbar(surf, 0, 0);
+        drawBottomToolbar(surf, 0, TIC80_HEIGHT - MENU_HEIGHT);
     }
 }
 
@@ -703,7 +683,6 @@ static void scanline(tic_mem* tic, s32 row, void* data)
             if(row == 0)
             {
                 memcpy(&tic->ram->vram.palette, item->palette, sizeof(tic_palette));
-                fadePalette(&tic->ram->vram.palette, surf->anim.val.coverFade);
             }
 
             return;
