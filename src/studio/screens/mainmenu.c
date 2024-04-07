@@ -477,14 +477,14 @@ enum MainMenu
 static const MenuItem MainMenu[] =
 {
     {"GAME MENU",   showGameMenu},
-    {"RESUME GAME", onResumeGame},
-    {"RESET GAME",  onResetGame},
+    {"RESUME", onResumeGame},
+    {"RESET",  onResetGame},
 #if defined(BUILD_EDITORS)
-    {"CLOSE GAME",  onExitGame},
+    {"CLOSE",  onExitGame},
 #endif
     {"OPTIONS",     showOptionsMenu},
     {""},
-    {"QUIT POSITRON", onExitStudio},
+    {"QUIT", onExitStudio},
 };
 
 static void showMainMenu(void* data, s32 pos)
