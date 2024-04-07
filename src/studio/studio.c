@@ -973,10 +973,10 @@ static void drawPopup(Studio* studio)
     {
         enum{Width = TIC80_WIDTH, Height = TIC_FONT_HEIGHT + 1};
 
-        tic_api_rect(studio->tic, 0, studio->anim.pos.popup, Width, Height, tic_color_red);
+        tic_api_rect(studio->tic, 0, 0, Width, Height, tic_color_red);
         tic_api_print(studio->tic, studio->popup.message, 
             (s32)(Width - strlen(studio->popup.message) * TIC_FONT_WIDTH)/2,
-            studio->anim.pos.popup + 1, tic_color_white, true, 1, false);
+            1, tic_color_white, true, 1, false);
 
         // render popup message
         {
@@ -984,7 +984,7 @@ static void drawPopup(Studio* studio)
             const tic_bank* bank = &getConfig(studio)->cart->bank0;
             u32* dst = tic->product.screen + TIC80_MARGIN_LEFT + TIC80_MARGIN_TOP * TIC80_FULLWIDTH;
 
-            for(s32 i = 0, y = 0; y < (Height + studio->anim.pos.popup); y++, dst += TIC80_MARGIN_RIGHT + TIC80_MARGIN_LEFT)
+            for(s32 i = 0, y = 0; y < (Height); y++, dst += TIC80_MARGIN_RIGHT + TIC80_MARGIN_LEFT)
                 for(s32 x = 0; x < Width; x++)
                 *dst++ = tic_rgba(&bank->palette.vbank0.colors[tic_tool_peek4(tic->ram->vram.screen.data, i++)]);
         }        
