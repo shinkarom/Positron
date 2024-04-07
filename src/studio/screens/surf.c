@@ -141,8 +141,6 @@ static void drawMenu(Surf* surf, s32 x, s32 y)
 
     enum {Height = MENU_HEIGHT};
 
-    tic_api_rect(tic, 0, y, TIC80_WIDTH, Height, tic_color_red);
-
     s32 ym = y - surf->menu.pos * MENU_HEIGHT + (MENU_HEIGHT - TIC_FONT_HEIGHT) / 2;
     for(s32 i = 0; i < surf->menu.count; i++, ym += Height)
     {
@@ -150,6 +148,14 @@ static void drawMenu(Surf* surf, s32 x, s32 y)
 
         if (ym > (-(TIC_FONT_HEIGHT + 1)) && ym <= TIC80_HEIGHT) 
         {
+			if(ym <y || ym>=y+Height){
+				tic_api_rect(tic, 0, ym-1, TIC80_WIDTH, Height, tic_color_black);
+			}
+			else
+			{
+				tic_api_rect(tic, 0, ym-1, TIC80_WIDTH, Height, tic_color_red);
+			}
+			
             tic_api_print(tic, name, x + MAIN_OFFSET, ym + 1, tic_color_black, false, 1, false);
             tic_api_print(tic, name, x + MAIN_OFFSET, ym, tic_color_white, false, 1, false);
         }
