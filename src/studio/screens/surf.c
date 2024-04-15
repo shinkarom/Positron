@@ -639,7 +639,7 @@ static void tick(Surf* surf)
     }
 
     if (getStudioMode(surf->studio) != TIC_SURF_MODE) return;
-
+/*
     if (surf->menu.count > 0)
     {
         loadCover(surf);
@@ -649,7 +649,7 @@ static void tick(Surf* surf)
         if(cover)
             memcpy(tic->ram->vram.screen.data, cover->data, sizeof(tic_screen));
     }
-
+*/
     VBANK(tic, 1)
     {
         tic_api_cls(tic, tic->ram->vram.vars.clear = tic_color_yellow);
