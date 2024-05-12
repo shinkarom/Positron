@@ -33,8 +33,7 @@ set(TIC80_OUTPUT tic80)
 
 add_library(tic80studio STATIC
     ${TIC80STUDIO_SRC}
-    ${DEMO_CARTS_OUT}
-    ${CMAKE_SOURCE_DIR}/build/assets/cart.png.dat)
+    ${DEMO_CARTS_OUT})
 
 if(WIN32)
     target_include_directories(tic80studio PRIVATE ${THIRDPARTY_DIR}/dirent/include)

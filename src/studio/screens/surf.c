@@ -156,7 +156,6 @@ static void drawMenu(Surf* surf, s32 x, s32 y)
 				tic_api_rect(tic, 0, ym-1, TIC80_WIDTH, Height, tic_color_red);
 			}
 			
-            tic_api_print(tic, name, x + MAIN_OFFSET, ym + 1, tic_color_black, false, 1, false);
             tic_api_print(tic, name, x + MAIN_OFFSET, ym, tic_color_white, false, 1, false);
         }
     }

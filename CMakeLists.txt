@@ -14,7 +14,7 @@ message("VERSION_HASH: ${VERSION_HASH}")
 
 configure_file("${PROJECT_SOURCE_DIR}/version.h.in" "${CMAKE_CURRENT_BINARY_DIR}/version.h")
 
-if(ANDROID OR EMSCRIPTEN OR N3DS OR RPI)
+if(ANDROID OR EMSCRIPTEN OR RPI)
     set(BUILD_LIBRETRO_DEFAULT OFF)
     set(BUILD_DEMO_CARTS_DEFAULT OFF)
     set(BUILD_PLAYER_DEFAULT OFF)
@@ -127,7 +127,6 @@ include(cmake/studio.cmake)
 include(cmake/sdl.cmake)
 include(cmake/sokol.cmake)
 include(cmake/libretro.cmake)
-include(cmake/n3ds.cmake)
 
 include(cmake/stub.cmake)
 include(cmake/install.cmake)

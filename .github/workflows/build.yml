@@ -31,14 +31,14 @@ jobs:
       - name: Deploy
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-winxp"
-          path: build/bin/tic80.exe
+          name: "positron-winxp"
+          path: build/bin/positron.exe
 
       - name: Deploy stubs
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-winxp-stub"
-          path: build/bin/tic80*.exe
+          name: "positron-winxp-stub"
+          path: build/bin/positron*.exe
 
   # === Windows XP PRO ===
   winxp-pro:
@@ -65,8 +65,8 @@ jobs:
       - name: Deploy
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-winxp-pro"
-          path: build/bin/tic80.exe
+          name: "positron-winxp-pro"
+          path: build/bin/positron.exe
 
   # === Windows ===
   windows:
@@ -92,14 +92,14 @@ jobs:
       - name: Deploy
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-windows"
-          path: build/bin/tic80.exe
+          name: "positron-windows"
+          path: build/bin/positron.exe
 
       - name: Deploy stubs
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-windows-stub"
-          path: build/bin/tic80*.exe
+          name: "positron-windows-stub"
+          path: build/bin/positron*.exe
 
   # === Windows PRO ===
   windows-pro:
@@ -125,8 +125,8 @@ jobs:
       - name: Deploy
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-windows-pro"
-          path: build/bin/tic80.exe
+          name: "positron-windows-pro"
+          path: build/bin/positron.exe
 
   # === Windows Sokol ===
   windows-sokol:
@@ -148,13 +148,13 @@ jobs:
           cd build
           cmake -G "Visual Studio 16 2019" -DBUILD_SDL=Off -DBUILD_SOKOL=On -DCMAKE_BUILD_TYPE=%BUILD_TYPE% ..
           cmake --build . --config %BUILD_TYPE% --parallel
-          cp bin/tic80-sokol.exe bin/tic80.exe
+          cp bin/positron-sokol.exe bin/positron.exe
 
       - name: Deploy
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-windows-sokol"
-          path: build/bin/tic80.exe
+          name: "positron-windows-sokol"
+          path: build/bin/positron.exe
 
   # === Windows MinGW-64 ===
   windows-mingw:
@@ -188,8 +188,8 @@ jobs:
       - name: Deploy
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-mingw"
-          path: build/bin/tic80.exe
+          name: "positron-mingw"
+          path: build/bin/positron.exe
 
   # === Ubuntu PRO ===
   linux-pro:
@@ -220,14 +220,14 @@ jobs:
       - name: Deploy DEB
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-linux-deb-pro"
-          path: build/tic80.deb
+          name: "positron-linux-deb-pro"
+          path: build/positron.deb
 
       - name: Deploy ZIP
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-linux-pro"
-          path: build/bin/tic80
+          name: "positron-linux-pro"
+          path: build/bin/positron
 
   # === Ubuntu ===
   linux:
@@ -258,25 +258,25 @@ jobs:
       - name: Deploy DEB
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-linux-deb"
-          path: build/tic80.deb
+          name: "positron-linux-deb"
+          path: build/positron.deb
 
       - name: Deploy ZIP
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-linux"
-          path: build/bin/tic80
+          name: "positron-linux"
+          path: build/bin/positron
 
       - name: Deploy stubs
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-linux-stub"
-          path: build/bin/tic80*
+          name: "positron-linux-stub"
+          path: build/bin/positron*
 
   # === Raspberry PI ===
   rpi:
     runs-on: ubuntu-latest
-    container: nesbox/rpi-tic80:latest
+    container: nesbox/rpi-positron:latest
 
     steps:
       - uses: actions/checkout@v3
@@ -299,25 +299,25 @@ jobs:
       - name: Deploy DEB
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-rpi-dep"
-          path: build/tic80.deb
+          name: "positron-rpi-dep"
+          path: build/positron.deb
 
       - name: Deploy
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-rpi"
-          path: build/bin/tic80
+          name: "positron-rpi"
+          path: build/bin/positron
 
       - name: Deploy stubs
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-rpi-stub"
-          path: build/bin/tic80*
+          name: "positron-rpi-stub"
+          path: build/bin/positron*
 
   # === Raspberry PI PRO ===
   rpi-pro:
     runs-on: ubuntu-latest
-    container: nesbox/rpi-tic80:latest
+    container: nesbox/rpi-positron:latest
 
     steps:
       - uses: actions/checkout@v3
@@ -341,19 +341,19 @@ jobs:
       - name: Deploy DEB
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-rpi-deb-pro"
-          path: build/tic80.deb
+          name: "positron-rpi-deb-pro"
+          path: build/positron.deb
 
       - name: Deploy
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-rpi-pro"
-          path: build/bin/tic80
+          name: "positron-rpi-pro"
+          path: build/bin/positron
 
   # === Raspberry PI 1-3 Bare Metal ===
   rpi-baremetal:
     runs-on: ubuntu-latest
-    container: nesbox/baremetalpi-tic80:latest
+    container: nesbox/baremetalpi-positron:latest
 
     steps:
       - uses: actions/checkout@v3
@@ -387,7 +387,7 @@ jobs:
           git apply build/baremetalpi/circle.patch
           cd build
           cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_TOOLCHAIN_FILE=baremetalpi/toolchain.cmake ..
-          make tic80studio -j$(nproc)
+          make positronstudio -j$(nproc)
           cd baremetalpi
           make -j$(nproc)
           cd ../../vendor/circle-stdlib/libs/circle/boot/
@@ -401,7 +401,7 @@ jobs:
       - name: Deploy
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-rpi-baremetal"
+          name: "positron-rpi-baremetal"
           path: |
             vendor/circle-stdlib/libs/circle/boot/config.txt
             vendor/circle-stdlib/libs/circle/boot/kernel.img
@@ -413,7 +413,7 @@ jobs:
   # === Raspberry PI 4 Bare Metal ===
   rpi4-baremetal:
     runs-on: ubuntu-latest
-    container: nesbox/baremetalpi-tic80:latest
+    container: nesbox/baremetalpi-positron:latest
 
     steps:
       - uses: actions/checkout@v3
@@ -447,7 +447,7 @@ jobs:
           git apply build/baremetalpi/circle.patch
           cd build
           cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_TOOLCHAIN_FILE=baremetalpi/toolchain.cmake ..
-          make tic80studio -j$(nproc)
+          make positronstudio -j$(nproc)
           cd baremetalpi
           make -j$(nproc)
           cd ../../vendor/circle-stdlib/libs/circle/boot/
@@ -461,7 +461,7 @@ jobs:
       - name: Deploy
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-rpi4-baremetal"
+          name: "positron-rpi4-baremetal"
           path: |
             vendor/circle-stdlib/libs/circle/boot/bcm2711-rpi-4-b.dtb
             vendor/circle-stdlib/libs/circle/boot/bcm2711-rpi-cm4.dtb
@@ -472,34 +472,6 @@ jobs:
             vendor/circle-stdlib/libs/circle/boot/kernel.img
             vendor/circle-stdlib/libs/circle/boot/LICENCE.broadcom
             vendor/circle-stdlib/libs/circle/boot/start4.elf
-
-  # === Nintendo 3DS build ===
-  nintendo-3ds:
-    runs-on: ubuntu-latest
-    container: nesbox/devkitpro-tic80:latest
-
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: recursive
-          fetch-depth: 0
-
-      - name: Install Host toolchain
-        run: |
-          apt-get update
-          apt-get install --assume-yes build-essential ruby-full
-
-      - name: Build
-        run: |
-          cd build
-          cmake -DCMAKE_TOOLCHAIN_FILE=$DEVKITPRO/3ds.cmake -DN3DS=TRUE -DCMAKE_BUILD_TYPE=$BUILD_TYPE ..
-          make -j$(nproc)
-
-      - name: Deploy
-        uses: actions/upload-artifact@v3
-        with:
-          name: "tic80-nintendo-3ds"
-          path: build/bin/tic80.3dsx
 
   # === MacOS 12 ===
   macos:
@@ -520,25 +492,25 @@ jobs:
           cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE DBUILD_SDLGPU=On -DBUILD_STUB=On ..
           cmake --build . --config $BUILD_TYPE --parallel
           cpack
-          cp *.dmg tic80.dmg
+          cp *.dmg positron.dmg
 
       - name: Deploy DMG
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-macos-dmg"
-          path: build/tic80.dmg
+          name: "positron-macos-dmg"
+          path: build/positron.dmg
 
       - name: Deploy
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-macos"
-          path: build/bin/tic80
+          name: "positron-macos"
+          path: build/bin/positron
 
       - name: Deploy stubs
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-macos-stub"
-          path: build/bin/tic80*
+          name: "positron-macos-stub"
+          path: build/bin/positron*
 
   # === MacOS 12 PRO ===
   macos-pro:
@@ -559,19 +531,19 @@ jobs:
           cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_SDLGPU=On -DBUILD_PRO=On ..
           cmake --build . --config $BUILD_TYPE --parallel
           cpack
-          cp *.dmg tic80.dmg
+          cp *.dmg positron.dmg
 
       - name: Deploy DMG
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-macos-dmg-pro"
-          path: build/tic80.dmg
+          name: "positron-macos-dmg-pro"
+          path: build/positron.dmg
 
       - name: Deploy
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-macos-pro"
-          path: build/bin/tic80
+          name: "positron-macos-pro"
+          path: build/bin/positron
 
   # === Android ===
   android:
@@ -602,7 +574,7 @@ jobs:
           cd build/android
           chmod +x gradlew
           ./gradlew assembleRelease
-          cp app/build/outputs/apk/release/app-release.apk tic80.apk
+          cp app/build/outputs/apk/release/app-release.apk positron.apk
 
         env:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
@@ -610,8 +582,8 @@ jobs:
       - name: Deploy
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-android"
-          path: build/android/tic80.apk
+          name: "positron-android"
+          path: build/android/positron.apk
 
   # === HTML ===
   html:
@@ -636,46 +608,46 @@ jobs:
           cmake --build . --config $BUILD_TYPE --parallel
           mkdir bin/html bin/html-export
           cp html/export.html bin/html-export/index.html
-          cp bin/tic80*.js bin/html-export/
-          cp bin/tic80*.wasm bin/html-export/
+          cp bin/positron*.js bin/html-export/
+          cp bin/positron*.wasm bin/html-export/
           cp html/index.html bin/html/index.html
           cp html/export.html bin/html/export.html
-          cp bin/tic80.js bin/html/tic80.js
-          cp bin/tic80.wasm bin/html/tic80.wasm
-          cp bin/tic80.js webapp/tic80.js
-          cp bin/tic80.wasm webapp/tic80.wasm
+          cp bin/positron.js bin/html/positron.js
+          cp bin/positron.wasm bin/html/positron.wasm
+          cp bin/positron.js webapp/positron.js
+          cp bin/positron.wasm webapp/positron.wasm
 
       - name: Deploy
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-html"
+          name: "positron-html"
           path: |
-            build/bin/html/tic80.js
-            build/bin/html/tic80.wasm
+            build/bin/html/positron.js
+            build/bin/html/positron.wasm
             build/bin/html/index.html
             build/bin/html/export.html
 
       - name: Deploy WebApp
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-webapp"
+          name: "positron-webapp"
           path: |
             build/webapp/index.html
             build/webapp/serviceworker.js
-            build/webapp/tic80-180.png
-            build/webapp/tic80-192.png
-            build/webapp/tic80-512.png
-            build/webapp/tic80.webmanifest
-            build/webapp/tic80.js
-            build/webapp/tic80.wasm
+            build/webapp/positron-180.png
+            build/webapp/positron-192.png
+            build/webapp/positron-512.png
+            build/webapp/positron.webmanifest
+            build/webapp/positron.js
+            build/webapp/positron.wasm
 
       - name: Deploy stubs
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-html-stub"
+          name: "positron-html-stub"
           path: |
-            build/bin/html-export/tic80*.js
-            build/bin/html-export/tic80*.wasm
+            build/bin/html-export/positron*.js
+            build/bin/html-export/positron*.wasm
             build/bin/html-export/index.html
 
   # === Export ===
@@ -687,37 +659,37 @@ jobs:
       - name: Download Windows XP artifact
         uses: actions/download-artifact@v3
         with:
-          name: tic80-winxp
+          name: positron-winxp
           path: winxpdir
 
       - name: Download Windows artifact
         uses: actions/download-artifact@v3
         with:
-          name: tic80-windows
+          name: positron-windows
           path: windir
 
       - name: Download Ubuntu artifact
         uses: actions/download-artifact@v3
         with:
-          name: tic80-linux
+          name: positron-linux
           path: linuxdir
 
       - name: Download RPI artifact
         uses: actions/download-artifact@v3
         with:
-          name: tic80-rpi
+          name: positron-rpi
           path: rpidir
 
       - name: Download MacOS artifact
         uses: actions/download-artifact@v3
         with:
-          name: tic80-macos
+          name: positron-macos
           path: macdir
 
       - name: Download HTML artifact
         uses: actions/download-artifact@v3
         with:
-          name: tic80-html
+          name: positron-html
 
       - name: Rename
         run: |
@@ -727,13 +699,13 @@ jobs:
           cp macdir/* mac
           cp rpidir/* rpi
           mv -f export.html index.html
-          zip html.zip index.html tic80.js tic80.wasm
+          zip html.zip index.html positron.js positron.wasm
           mv -f html.zip html
 
       - name: Deploy
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-export"
+          name: "positron-export"
           path: |
             winxp
             win
@@ -754,53 +726,53 @@ jobs:
       - name: Download Windows XP artifact
         uses: actions/download-artifact@v3
         with:
-          name: tic80-winxp-stub
+          name: positron-winxp-stub
           path: winxpdir
 
       - name: Download Windows artifact
         uses: actions/download-artifact@v3
         with:
-          name: tic80-windows-stub
+          name: positron-windows-stub
           path: windir
 
       - name: Download Ubuntu artifact
         uses: actions/download-artifact@v3
         with:
-          name: tic80-linux-stub
+          name: positron-linux-stub
           path: linuxdir
 
       - name: Download RPI artifact
         uses: actions/download-artifact@v3
         with:
-          name: tic80-rpi-stub
+          name: positron-rpi-stub
           path: rpidir
 
       - name: Download MacOS artifact
         uses: actions/download-artifact@v3
         with:
-          name: tic80-macos-stub
+          name: positron-macos-stub
           path: macdir
 
       - name: Download HTML artifact
         uses: actions/download-artifact@v3
         with:
-          name: tic80-html-stub
+          name: positron-html-stub
 
       - name: Rename
         run: |
-          cp winxpdir/tic80${{ matrix.script }}.exe winxp${{ matrix.script }}
-          cp windir/tic80${{ matrix.script }}.exe win${{ matrix.script }}
-          cp linuxdir/tic80${{ matrix.script }} linux${{ matrix.script }}
-          cp rpidir/tic80${{ matrix.script }} rpi${{ matrix.script }}
-          cp macdir/tic80${{ matrix.script }} mac${{ matrix.script }}
-          mv -f tic80${{ matrix.script }}.js tic80.js
-          zip html${{ matrix.script }}.zip index.html tic80.js tic80${{ matrix.script }}.wasm
+          cp winxpdir/positron${{ matrix.script }}.exe winxp${{ matrix.script }}
+          cp windir/positron${{ matrix.script }}.exe win${{ matrix.script }}
+          cp linuxdir/positron${{ matrix.script }} linux${{ matrix.script }}
+          cp rpidir/positron${{ matrix.script }} rpi${{ matrix.script }}
+          cp macdir/positron${{ matrix.script }} mac${{ matrix.script }}
+          mv -f positron${{ matrix.script }}.js positron.js
+          zip html${{ matrix.script }}.zip index.html positron.js positron${{ matrix.script }}.wasm
           mv -f html${{ matrix.script }}.zip html${{ matrix.script }}
 
       - name: Deploy
         uses: actions/upload-artifact@v3
         with:
-          name: "tic80-export"
+          name: "positron-export"
           path: |
             winxp${{ matrix.script }}
             win${{ matrix.script }}
@@ -819,12 +791,12 @@ jobs:
         uses: geekyeggo/delete-artifact@v2
         with:
           name: |
-            tic80-winxp-stub
-            tic80-windows-stub
-            tic80-linux-stub
-            tic80-rpi-stub
-            tic80-macos-stub
-            tic80-html-stub
+            positron-winxp-stub
+            positron-windows-stub
+            positron-linux-stub
+            positron-rpi-stub
+            positron-macos-stub
+            positron-html-stub
 
   # === Delete PRO artifacts ===
   delete-pro:
@@ -836,11 +808,11 @@ jobs:
         uses: geekyeggo/delete-artifact@v2
         with:
           name: |
-            tic80-macos-pro
-            tic80-macos-dmg-pro
-            tic80-winxp-pro
-            tic80-windows-pro
-            tic80-linux-deb-pro
-            tic80-linux-pro
-            tic80-rpi-deb-pro
-            tic80-rpi-pro
+            positron-macos-pro
+            positron-macos-dmg-pro
+            positron-winxp-pro
+            positron-windows-pro
+            positron-linux-deb-pro
+            positron-linux-pro
+            positron-rpi-deb-pro
+            positron-rpi-pro
