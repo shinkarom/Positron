@@ -14,10 +14,6 @@ if(BUILD_DEMO_CARTS)
     target_include_directories(prj2cart PRIVATE ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/include)
     target_link_libraries(prj2cart tic80core)
 
-    add_executable(wasmp2cart ${TOOLS_DIR}/wasmp2cart.c ${CMAKE_SOURCE_DIR}/src/studio/project.c)
-    target_include_directories(wasmp2cart PRIVATE ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/include)
-    target_link_libraries(wasmp2cart tic80core)
-
     add_executable(bin2txt ${TOOLS_DIR}/bin2txt.c)
     target_link_libraries(bin2txt zlib)
 
@@ -93,33 +89,5 @@ if(BUILD_DEMO_CARTS)
     )
 
     endforeach(CART_FILE)
-
-    if(BUILD_WITH_WASM)
-
-        # we need to build these separately combining both the project
-        # and the external WASM binary chunk since projects do not
-        # include BINARY chunks
-
-        file(GLOB WASM_DEMOS
-            ${DEMO_CARTS_IN}/wasm/*.wasmp
-        )
-
-        foreach(CART_FILE ${WASM_DEMOS})
-
-            get_filename_component(CART_NAME ${CART_FILE} NAME_WE)
-            get_filename_component(DIR ${CART_FILE} DIRECTORY)
-
-            set(OUTNAME ${CMAKE_SOURCE_DIR}/build/assets/${CART_NAME}.posi.dat)
-            set(WASM_BINARY ${DIR}/${CART_NAME}.wasm)
-            set(OUTPRJ ${CMAKE_SOURCE_DIR}/build/${CART_NAME}.posi)
-            list(APPEND DEMO_CARTS_OUT ${OUTNAME})
-            add_custom_command(OUTPUT ${OUTNAME}
-                COMMAND ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/wasmp2cart ${CART_FILE} ${OUTPRJ} --binary ${WASM_BINARY} && ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/bin2txt ${OUTPRJ} ${OUTNAME} -z
-                DEPENDS bin2txt wasmp2cart ${CART_FILE} ${WASM_BINARY}
-            )
-
-        endforeach(CART_FILE)
-
-    endif()
 
 endif()

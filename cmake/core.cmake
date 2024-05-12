@@ -58,10 +58,6 @@ macro(MACRO_CORE SCRIPT DEFINE BUILD_DEPRECATED)
         list(APPEND TIC80CORE_SRC ${TIC80CORE_DIR}/api/janet.c)
     endif()
 
-    if(BUILD_WITH_WASM)
-        list(APPEND TIC80CORE_SRC ${TIC80CORE_DIR}/api/wasm.c)
-    endif()
-
     if(${BUILD_DEPRECATED})
         set(TIC80CORE_SRC ${TIC80CORE_SRC} ${TIC80CORE_DIR}/ext/gif.c)
     endif()
@@ -114,10 +110,6 @@ macro(MACRO_CORE SCRIPT DEFINE BUILD_DEPRECATED)
 
     if(BUILD_WITH_JANET)
         target_link_libraries(tic80core${SCRIPT} janet)
-    endif()
-
-    if(BUILD_WITH_WASM)
-        target_link_libraries(tic80core${SCRIPT} wasm)
     endif()
 
     if(${BUILD_DEPRECATED})

@@ -58,10 +58,6 @@
 	path = vendor/sdl2
 	url = https://github.com/libsdl-org/SDL.git
 	shallow = true
-[submodule "vendor/wasm3"]
-	path = vendor/wasm3
-	url = https://github.com/wasm3/wasm3.git
-	shallow = true
 [submodule "vendor/janet"]
 	path = vendor/janet
 	url = https://github.com/janet-lang/janet.git

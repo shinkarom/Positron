@@ -29,10 +29,6 @@ extern tic_script_config SchemeSyntaxConfig;
 extern tic_script_config WrenSyntaxConfig;
 #endif
 
-#if defined(TIC_BUILD_WITH_WASM)
-extern tic_script_config WasmSyntaxConfig;
-#endif
-
 #if defined(TIC_BUILD_WITH_JANET)
 extern tic_script_config JanetSyntaxConfig;
 #endif

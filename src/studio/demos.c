@@ -106,23 +106,6 @@ tic_script_config_extra SquirrelSyntaxConfigExtra =
 };
 #endif
 
-
-#if defined(TIC_BUILD_WITH_WASM)
-
-static const u8 WasmDemoRom[] =
-{
-    #include "../build/assets/wasmdemo.posi.dat"
-};
-
-tic_script_config_extra WasmSyntaxConfigExtra =
-{
-    .name               = "wasm",
-    .demoRom            = WasmDemoRom,
-    .demoRomSize        = sizeof WasmDemoRom,
-};
-
-#endif
-
 #if defined(TIC_BUILD_WITH_JANET)
 
 static const u8 JanetDemoRom[] =
