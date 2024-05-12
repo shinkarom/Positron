@@ -54,8 +54,7 @@ typedef enum
     CHUNK_CODE_ZIP,     // 16
     CHUNK_DEFAULT,      // 17
     CHUNK_SCREEN,       // 18
-    CHUNK_BINARY,       // 19
-    CHUNK_LANG,         // 20
+    CHUNK_LANG,         // 19
 } ChunkType;
 
 typedef struct
@@ -78,7 +77,7 @@ static const u8 Waveforms[] = {0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0
 
 static s32 chunkSize(const Chunk* chunk)
 {
-    return chunk->size == 0 && (chunk->type == CHUNK_CODE || chunk->type == CHUNK_BINARY) ? TIC_BANK_SIZE : retro_le_to_cpu16(chunk->size);
+    return chunk->size == 0 && (chunk->type == CHUNK_CODE) ? TIC_BANK_SIZE : retro_le_to_cpu16(chunk->size);
 }
 
 void tic_cart_load(tic_cartridge* cart, const u8* buffer, s32 size)
@@ -172,9 +171,6 @@ void tic_cart_load(tic_cartridge* cart, const u8* buffer, s32 size)
             case CHUNK_FLAGS:       LOAD_CHUNK(cart->banks[chunk->bank].flags);             break;
             case CHUNK_SCREEN:      LOAD_CHUNK(cart->banks[chunk->bank].screen);            break;
             case CHUNK_LANG:        LOAD_CHUNK(cart->lang);                                 break;
-            case CHUNK_BINARY:      
-                binary[chunk->bank] = (struct BinaryChunk){chunkSize(chunk), ptr};
-                break;
             case CHUNK_CODE:        
                 code[chunk->bank] = (struct CodeChunk){chunkSize(chunk), ptr};
                 break;
@@ -223,19 +219,6 @@ void tic_cart_load(tic_cartridge* cart, const u8* buffer, s32 size)
             ptr += chunkSize(chunk);
         }
 #undef LOAD_CHUNK
-
-        {
-            u32 total_size = 0;
-            char* ptr = cart->binary.data;
-            RFOR(const struct BinaryChunk*, chunk, binary)
-                if (chunk->size)
-                {
-                    memcpy(ptr, chunk->data, chunk->size);
-                    ptr += chunk->size;
-                    total_size += chunk->size;
-                }
-            cart->binary.size = total_size;
-        }
 
         if (!*cart->code.data)
         {
@@ -330,16 +313,6 @@ s32 tic_cart_save(const tic_cartridge* cart, u8* buffer)
     }
 
     const char* ptr;
-    if (cart->binary.size) 
-    {
-        ptr = cart->binary.data;
-        s32 remaining = cart->binary.size;
-        for (s32 i = cart->binary.size / TIC_BANK_SIZE; i >= 0; --i, ptr += TIC_BANK_SIZE) 
-        {
-            buffer = saveFixedChunk(buffer, CHUNK_BINARY, ptr, MIN(remaining, TIC_BANK_SIZE), i);
-            remaining -= TIC_BANK_SIZE;
-        }
-    }
 
     ptr = cart->code.data;
     for(s32 i = strlen(ptr) / TIC_BANK_SIZE; i >= 0; --i, ptr += TIC_BANK_SIZE)
