@@ -23,7 +23,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <tic80.h>
+#include <positron.h>
 #include "api.h"
 #include "tools.h"
 #include "cart.h"

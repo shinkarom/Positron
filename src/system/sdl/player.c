@@ -23,7 +23,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <SDL.h>
-#include <tic80.h>
+#include <positron.h>
 
 #if defined(__APPLE__)
 # if MAC_OS_X_VERSION_MIN_REQUIRED < 1060

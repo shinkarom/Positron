@@ -23,7 +23,7 @@
 #pragma once
 
 #include "retro_endianness.h"
-#include "tic80.h"
+#include "positron.h"
 #include "defines.h"
 
 #define TIC_VRAM_SIZE (32*1024) //16K
